@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 /**
 	Domyślna klasa wyjątków z której będziemy korzystać.
 	Makro EXCEPTION_PARAMS powoduje uzupełnienie trzech pierwszych parametrów automatycznymi wartościami.
@@ -13,6 +15,7 @@
 */
 
 #define EXCEPTION_PARAMS __PRETTY_FUNCTION__, __FILE__, __LINE__
+
 namespace proZPRd
 {
 	namespace Tools
@@ -32,6 +35,6 @@ namespace proZPRd
 			public:
 				const std::string ToString() const;
 				virtual const char * what() const noexcept;
-		}
+		};
 	}
 }
