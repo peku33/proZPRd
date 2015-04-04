@@ -6,3 +6,5 @@ class MySimpleClass
 	public:
 		MySimpleClass ();
 };
+
+// cos dopialem
