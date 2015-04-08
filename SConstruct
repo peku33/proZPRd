@@ -19,7 +19,7 @@ else:
 	E = Environment()
 	
 E.Append(CXXFLAGS = "-Wall -Wextra -std=c++11 -march=native -fdata-sections -ffunction-sections")
-E.Append(LINKFLAGS = "-static -pthread -Wl,--gc-sections -s")
+E.Append(LINKFLAGS = "-pthread -Wl,--gc-sections")
 
 BinDirectory = "Bin"
 if Debug:
@@ -29,6 +29,10 @@ else:
 	BinDirectory = os.path.join(BinDirectory, "Release")
 	E.Append(CXXFLAGS = "-O2")
 	E.Append(LINKFLAGS = "-s")
+
+if os.name == 'nt':
+	E.Append(LINKFLAGS = "-static")
+	
 
 # Stwórz katalog BinDirectory
 if not os.path.exists(BinDirectory):
