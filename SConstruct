@@ -19,7 +19,7 @@ else:
 	E = Environment()
 	
 E.Append(CXXFLAGS = "-Wall -Wextra -std=c++11 -march=native -fdata-sections -ffunction-sections")
-E.Append(LINKFLAGS = "-Wl,--gc-sections -pthread")
+E.Append(LINKFLAGS = "-static -pthread -Wl,--gc-sections -s")
 
 BinDirectory = "Bin"
 if Debug:
