@@ -26,6 +26,8 @@ namespace proZPRd
 				Funkcja ma wczytać wszystkie pliki i katalogi które znajdują się w danym katalogu i zwrócić je w postaci struktury poniżej.
 				
 				W secie Directory znajdują się katalogi, w Files pliki. Sortowanie zapewnia sam kontener.
+				
+				W razie wystąpienia błędu ma rzucać standardowy wyjątek Tools::Exception
 			*/
 			struct DirectoryEntries
 			{
