@@ -1,0 +1,1 @@
+start cmd /k "C:\Python27\Scripts\scons.bat"
