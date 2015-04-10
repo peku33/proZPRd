@@ -14,7 +14,16 @@ ClassesDirectories = ["proZPRd"] # Katalogi w których ma poszukiwać plików ź
 
 if os.name == 'nt':
 	E = Environment(tools = ['mingw'])
-	E['ENV']['PATH'] += ';' + ARGUMENTS.get('MinGwPath', r'C:\Program Files (x86)\mingw-w64\i686-4.9.2-posix-dwarf-rt_v3-rev1\mingw32\bin')
+	MinGwPathFileName = "MinGwPath.txt"
+	
+	if os.path.exists(MinGwPathFileName):
+		MinGwPath = open(MinGwPathFileName).read()
+		print(MinGwPath)
+	else:
+		print(MinGwPathFileName + " not found")
+		exit(1)
+	
+	E['ENV']['PATH'] += ';' + MinGwPath
 else:
 	E = Environment()
 	
