@@ -1,26 +1,14 @@
 #pragma once
 
 #include "Tools/NoCreateU.hpp"
-#include "Tools/Exception.hpp"
 #include <string>
-#include <fstream>
-#include <streambuf>
-#include <sys/stat.h>
-
-#ifdef WIN32
-	#define stat _stat
-#endif
-		
-		
-
 
 namespace proZPRd
 {
 	/**
 		Klasa opisująca podstawowe operacje na pliku
 		
-		W chwili obecnej zakładam, że będzie zawierała wyłącznie metody statyczne itp, więc nie ma konstruktorów, destruktorów itp. 
-		Zabronienie tworzenia obiektów klasy gwarantuje dziedziczenie po NoCreateU
+		W chwili obecnej zakładam, że będzie zawierała wyłącznie metody statyczne itp, więc nie ma konstruktorów, destruktorów itp. Zabronienie tworzenia obiektów klasy gwarantuje dziedziczenie po NoCreateU
 	*/
 	class File : public Tools::NoCreateU
 	{
