@@ -2,6 +2,7 @@
 
 #include "Tools/NoCreateU.hpp"
 #include <string>
+#include <vector>
 
 namespace proZPRd
 {
@@ -13,6 +14,9 @@ namespace proZPRd
 	class File : public Tools::NoCreateU
 	{
 		public:
+		
+			typedef std::vector<std::string> Lines_t;
+			
 			/**
 				Funkcja ma sprawdzić czy podany plik istnieje i czy jest plikiem.
 				
@@ -27,5 +31,11 @@ namespace proZPRd
 				Jeśli plik nie istnieje ma rzucić Tool::Exception z odpowiednimi parametrami
 			*/
 			static std::string ToString(const std::string & FileName);
+			
+			/**
+				Funkcja wczytuje cały plik o podanej nazwie do pamięci i zwraca go w postaci Lines_t, czyli wektora zawierającego linie pliku
+			*/
+			
+			static Lines_t GetLines(const std::string & FileName);
 	};
 }
