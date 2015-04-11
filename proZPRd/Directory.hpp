@@ -1,8 +1,10 @@
 #pragma once
 
 #include "Tools/NoCreateU.hpp"
-#include <set>
+#include "Tools/Exception.hpp"
 #include <string>
+#include <set>
+#include <dirent.h>
 
 namespace proZPRd
 {
