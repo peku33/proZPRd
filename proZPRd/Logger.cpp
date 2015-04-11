@@ -9,6 +9,18 @@ void proZPRd::Logger::Ok(const std::string & Message)
 {
 	Display(Message, MessageType::OK);
 }
+void proZPRd::Logger::Info(const std::string & Message)
+{
+	Display(Message, MessageType::INFO);
+}
+void proZPRd::Logger::Warning(const std::string & Message)
+{
+	Display(Message, MessageType::WARNING);
+}
+void proZPRd::Logger::Error(const std::string & Message)
+{
+	Display(Message, MessageType::ERROR);
+}
 void proZPRd::Logger::Display(const std::string & Message, const MessageType MT)
 {
 	/*

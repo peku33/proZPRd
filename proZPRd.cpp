@@ -5,7 +5,7 @@ int main()
 	proZPRd::Logger::Ok("proZPRd starting...");
 	
 	
-	proZPRd::Logger::Ok("Press ANY key to exit...");
+	proZPRd::Logger::Info("Press ANY key to exit...");
 	getc(stdin);
 	return 0;
 }
