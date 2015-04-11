@@ -5,25 +5,30 @@ bool proZPRd::File::Exists(const std::string & FileName)
 	struct stat s;
 	if(stat(FileName.c_str(), &s) == 0)
 	{
-		if(s.st_mode & S_IFDIR) return false;
-	}else return false;
+		if(s.st_mode & S_IFDIR) 
+			return false;
+	}
+	else 
+		return false;
 	
 	return true;
 }
 
 std::string proZPRd::File::ToString(const std::string & FileName)
 {
-	std::ifstream t(FileName);
-	std::string str;
+	std::ifstream file(FileName);
+	std::string buffer;
+	std::string line;
 	
-	if(!t.good()) throw Tools::Exception(EXCEPTION_PARAMS, "BLAD: Plik nie istnieje!");
+	if(!file.good()) throw Tools::Exception(EXCEPTION_PARAMS, "BLAD: Plik nie istnieje!");
 		
-	t.seekg(0, std::ios::end);   
-	str.reserve(t.tellg());
-	t.seekg(0, std::ios::beg);
-
-	str.assign((std::istreambuf_iterator<char>(t)), std::istreambuf_iterator<char>());
+	while(file)
+	{
+		std::getline(file, line);
+		buffer += line;
+		buffer += '\n';
+	}
 	
-	return str;
+	return buffer;
 }
 
