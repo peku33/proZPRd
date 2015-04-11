@@ -58,20 +58,18 @@ std::string proZPRd::File::ToString(const std::string & FileName)
 
 proZPRd::File::Lines_t proZPRd::File::GetLines(const std::string & FileName)
 {
-	proZPRd::File::Lines_t buffer;
-	std::string temp;
-	std::fstream f(FileName, std::fstream::in);
+	std::ifstream F(FileName);
 	
-	if(!f.good())
+	if(!F.good())
 		throw Tools::Exception(EXCEPTION_PARAMS, "fstream() failed...");
 	
-	while(f)
-	{
-		std::getline(f, temp);
-		buffer.push_back(temp);
-	}
+	Lines_t Buffer;
+	std::string Temp;
 	
-	f.close();
+	while(std::getline(F, Temp))
+		Buffer.push_back(Temp);
 	
-	return buffer;
+	F.close();
+	
+	return Buffer;
 }
