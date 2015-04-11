@@ -26,7 +26,8 @@ std::string proZPRd::File::ToString(const std::string & FileName)
 	{
 		std::getline(file, line);
 		buffer += line;
-		buffer += '\n';
+		if(file)
+			buffer += '\n';
 	}
 	
 	return buffer;
