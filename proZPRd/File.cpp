@@ -69,7 +69,9 @@ proZPRd::File::Lines_t proZPRd::File::GetLines(const std::string & FileName)
 	while(std::getline(F, Temp))
 		Buffer.push_back(Temp);
 	
-	F.close();
+	/*
+		Plik jest automatycznie zamykany przy usuwaniu strumienia, wiec F.close() jest zbedne
+	*/
 	
 	return Buffer;
 }
