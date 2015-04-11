@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <string>
 #include <sys/stat.h>
+#include <fstream>
 #include "Tools/Exception.hpp"
 
 bool proZPRd::File::Exists(const std::string & FileName)
@@ -55,3 +56,22 @@ std::string proZPRd::File::ToString(const std::string & FileName)
 	return Output;
 }
 
+proZPRd::File::Lines_t proZPRd::File::GetLines(const std::string & FileName)
+{
+	proZPRd::File::Lines_t buffer;
+	std::string temp;
+	std::fstream f(FileName, std::fstream::in);
+	
+	if(!f.good())
+		throw Tools::Exception(EXCEPTION_PARAMS, "fstream() failed...");
+	
+	while(f)
+	{
+		std::getline(f, temp);
+		buffer.push_back(temp);
+	}
+	
+	f.close();
+	
+	return buffer;
+}
