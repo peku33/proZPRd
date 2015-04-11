@@ -1,10 +1,8 @@
 #pragma once
 
 #include "Tools/NoCreateU.hpp"
-#include "Tools/Exception.hpp"
-#include <string>
 #include <set>
-#include <dirent.h>
+#include <string>
 
 namespace proZPRd
 {
@@ -37,5 +35,10 @@ namespace proZPRd
 				std::set<std::string> Files;
 			};
 			static DirectoryEntries List(const std::string & DirectoryName);
+			
+			/**
+				Funkcja zwraca znak rozdzielający katalogi w zależności od platformy
+			*/
+			static std::string GetDirectorySeparator();
 	};
 }
