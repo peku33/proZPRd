@@ -37,5 +37,16 @@ namespace proZPRd
 			*/
 			
 			static Lines_t GetLines(const std::string & FileName);
+			
+			struct FileStruct
+			{
+				std::string Name;
+				std::string Extension;
+			};
+			/**
+				Funkcja ma podzielić nazwę pliku na nazwę i rozszerzenie.
+			*/
+			static FileStruct SplitFileName(const std::string & FileName);
+			
 	};
 }
