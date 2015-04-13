@@ -6,7 +6,8 @@ import pprint
 
 # Edytowalne ustawienia
 
-Debug = 1 # Od tego zależą flagi kompilacji i linkowania, patrz niżej
+# Tylko WINDOWS - w pliku MinGwPathFileName.txt należy umieścić ścieżkę do katalogu bin\ kompilatora MinGW
+# Wybór DEBUG / RELEASE - należy dopisać parametr DEBUG=1 do wiersza poleceń uruchamiającego SCons
 MainDirectory = "." # Plików źródłowych z main() spodziewamy się w lokalnym katalogu
 ClassesDirectories = ["proZPRd"] # Katalogi w których ma poszukiwać plików źródłowych klas.
 
@@ -18,7 +19,6 @@ if os.name == 'nt':
 	
 	if os.path.exists(MinGwPathFileName):
 		MinGwPath = open(MinGwPathFileName).read()
-		print(MinGwPath)
 	else:
 		print(MinGwPathFileName + " not found")
 		exit(1)
@@ -26,7 +26,9 @@ if os.name == 'nt':
 	E['ENV']['PATH'] += ';' + MinGwPath
 else:
 	E = Environment()
-	
+
+Debug = ARGUMENTS.get('DEBUG', 0)
+
 E.Append(CXXFLAGS = "-Wall -Wextra -std=c++11 -march=native -fdata-sections -ffunction-sections")
 E.Append(LINKFLAGS = "-pthread -Wl,--gc-sections")
 

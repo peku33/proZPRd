@@ -1,0 +1,1 @@
+start cmd /k "C:\Python27\Scripts\scons.bat DEBUG=1 -c && C:\Python27\Scripts\scons.bat -c"
