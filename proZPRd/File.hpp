@@ -14,9 +14,6 @@ namespace proZPRd
 	class File : public Tools::NoCreateU
 	{
 		public:
-		
-			typedef std::vector<std::string> Lines_t;
-			
 			/**
 				Funkcja ma sprawdzić czy podany plik istnieje i czy jest plikiem.
 				
@@ -35,18 +32,18 @@ namespace proZPRd
 			/**
 				Funkcja wczytuje cały plik o podanej nazwie do pamięci i zwraca go w postaci Lines_t, czyli wektora zawierającego linie pliku
 			*/
-			
+			typedef std::vector<std::string> Lines_t;
 			static Lines_t GetLines(const std::string & FileName);
 			
+			/**
+				Funkcja ma podzielić nazwę pliku na nazwę i rozszerzenie.
+				Jeśli plik nie ma rozszerzenia, pozostaje ono puste.
+			*/
 			struct FileStruct
 			{
 				std::string Name;
 				std::string Extension;
 			};
-			/**
-				Funkcja ma podzielić nazwę pliku na nazwę i rozszerzenie.
-				Jeśli plik nie ma rozszerzenia, pozostaje ono puste.
-			*/
 			static FileStruct SplitFileName(const std::string & FileName);
 			
 	};
