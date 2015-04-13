@@ -78,11 +78,6 @@ proZPRd::File::Lines_t proZPRd::File::GetLines(const std::string & FileName)
 
 proZPRd::File::FileStruct proZPRd::File::SplitFileName(const std::string & FileName)
 {
-	struct FileStruct FN;
-	std::size_t pos = FileName.find(".");
-	if(pos == std::string::npos)
-		throw Tools::Exception(EXCEPTION_PARAMS, "SplitFileName failed...");
-	FN.Name = FileName.substr(0, pos);
-	FN.Extension = FileName.substr(pos + 1);
-	return FN;
+	std::size_t LastDotPosition = FileName.find_last_of(".");
+	return (FileStruct) {FileName.substr(0, LastDotPosition), FileName.substr(LastDotPosition + 1)};
 } 

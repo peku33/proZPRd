@@ -45,6 +45,7 @@ namespace proZPRd
 			};
 			/**
 				Funkcja ma podzielić nazwę pliku na nazwę i rozszerzenie.
+				Jeśli plik nie ma rozszerzenia, pozostaje ono puste.
 			*/
 			static FileStruct SplitFileName(const std::string & FileName);
 			
