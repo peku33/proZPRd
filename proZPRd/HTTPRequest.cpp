@@ -4,29 +4,54 @@
 
 proZPRd::HTTPRequest::HTTPRequest(const std::string & Request)
 {
-	unsigned URLEnd;
-	if((URLEnd = Request.find(" ", 4)) == std::string::npos)
-		throw Tools::Exception(EXCEPTION_PARAMS, "HTTP request format error: URL not found");
+	Lines_t Buffer = toLines_t(Request);
 	
-	URL = Request.substr(4, URLEnd - 4);
+	if(Buffer[0].substr(0, 3) != "GET")
+		throw Tools::Exception(EXCEPTION_PARAMS, "HTTP request format error!");
 	
-	unsigned HostPos;
-	if((HostPos = Request.find("Host:")) == std::string::npos)
-		throw Tools::Exception(EXCEPTION_PARAMS, "HTTP request format error: Host not found");
+	if(Buffer[0].find(" ", 4) == std::string::npos)
+		throw Tools::Exception(EXCEPTION_PARAMS, "HTTP request format error: Bad URL format! ");
 	
-	unsigned HostEnd;
-	if((HostEnd = Request.find("\r\n", HostPos)) == std::string::npos)
-		throw Tools::Exception(EXCEPTION_PARAMS, "HTTP request format error: bad format");
+	URL = Buffer[0].substr(4, Buffer[0].find(" ", 4) - 4);
 	
-	Host = Request.substr(HostPos + 6, HostEnd - HostPos - 6);
+	Host = Find(Buffer, "Host");
 	
-	unsigned UserAgentPos;
-	if((UserAgentPos = Request.find("UserAgent:")) != std::string::npos)
-	{
-		unsigned UserAgentEnd;
-		if((UserAgentEnd = Request.find("\r\n", UserAgentPos)) == std::string::npos)
-			throw Tools::Exception(EXCEPTION_PARAMS, "HTTP request format error: bad format");
-		
-		UserAgent = Request.substr(UserAgentPos + 11, UserAgentEnd - UserAgentPos - 11);
+	if(Host.empty())
+		throw Tools::Exception(EXCEPTION_PARAMS, "HTTP request format error: Host not found!");
+	
+	UserAgent = Find(Buffer, "UserAgent");
+	
+}
+
+proZPRd::HTTPRequest::Lines_t proZPRd::HTTPRequest::toLines_t(const std::string & Request)
+{
+	Lines_t Buffer;
+	unsigned int Position = 0;
+	unsigned int Temp;
+	
+	while((Temp = Request.find("\r", Position)) != std::string::npos)
+	{	
+		Buffer.push_back(Request.substr(Position, Temp - Position));
+		Position = Temp + 2; //Przesuwamy wskaznik w stringu za znaki \r\n
 	}
-} 
+	
+	return Buffer;
+}
+
+std::string proZPRd::HTTPRequest::Find(const Lines_t & Request, const std::string & Header)
+{
+	unsigned int i;
+	unsigned int Position;
+	unsigned int Size = Request.size();
+	
+	for(i = 1; i < Size; ++i) //Pozycja 0 nas nie interesuje
+	{
+		if((Position = Request[i].find(": ")) != std::string::npos)
+		{
+			if(Request[i].substr(0, Position) == Header)
+				return Request[i].substr(Position + 2); // +3 zeby zaczac dzielic stringa od pierwszego znaku za ": "
+		}
+	}
+
+	return "";
+}
