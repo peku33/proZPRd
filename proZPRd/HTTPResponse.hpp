@@ -1,0 +1,32 @@
+#pragma once
+
+#include <string>
+
+namespace proZPRd
+{
+	class HTTPResponse
+	{
+		public:
+			/**
+				Metoda przekszałcająca dane z własnych informacji oraz wyników funkcji wirtualnych na pełny ciąg który zostanie odesłany klientowi jako odpowiedź
+			*/
+			std::string CreateResponse() const;
+		
+		protected:
+			/**
+				Statyczna metoda zamieniająca kod odpowiedzi HTTP na jego postać tekstową
+			*/
+			static std::string HttpResponseCodeToString(const unsigned short HttpResponseCode);
+			
+		private:
+			/**
+				Metoda zwracająca kod odpowiedzi HTTP
+			*/
+			virtual unsigned short GetHttpResponseCode() const = 0;
+			
+			/**
+				Metoda zwracająca dodatkowe nagłówki które mają zosta
+			*/
+			virtual std::string GetContent() const = 0;
+	};
+}

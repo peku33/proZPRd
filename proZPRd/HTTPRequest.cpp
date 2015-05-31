@@ -1,57 +1,63 @@
 #include "HTTPRequest.hpp"
-#include "Tools/Exception.hpp"
 
+#include "Strings.hpp"
+#include "Tools/Exception.hpp"
+#include <stdexcept>
 
 proZPRd::HTTPRequest::HTTPRequest(const std::string & Request)
 {
-	Lines_t Buffer = toLines_t(Request);
+	// Linie z kolejnymi danymi
+	auto Lines = Strings::SplitString(Request, "\r\n");
 	
-	if(Buffer[0].substr(0, 3) != "GET")
-		throw Tools::Exception(EXCEPTION_PARAMS, "HTTP request format error!");
+	/*
+		Tu następuje podział pierwszej linii na części
+		
+		Pierwsza linia:
+			[0] => HttpMethod
+			[1] => Url
+			[2] => HTTPVersion
+	*/
+	auto RequestParts = Strings::SplitString(Lines[0], " ");
+	if(RequestParts.size() != 3)
+		throw Tools::Exception(EXCEPTION_PARAMS, "Illformed HTTP Request first line");
 	
-	if(Buffer[0].find(" ", 4) == std::string::npos)
-		throw Tools::Exception(EXCEPTION_PARAMS, "HTTP request format error: Bad URL format! ");
+	if(RequestParts[0] != "GET")
+		throw Tools::Exception(EXCEPTION_PARAMS, "Unkown HTTPMethod `" + RequestParts[0] + "`");
+		
+	if(RequestParts[2] != "HTTP/1.0" && RequestParts[2] != "HTTP/1.1")
+		throw Tools::Exception(EXCEPTION_PARAMS, "Unkown HTTPVersion `" + RequestParts[2] + "`");
 	
-	URL = Buffer[0].substr(4, Buffer[0].find(" ", 4) - 4);
+	const std::string HeaderDelimiter(": ");
 	
-	Host = Find(Buffer, "Host");
-	
-	if(Host.empty())
-		throw Tools::Exception(EXCEPTION_PARAMS, "HTTP request format error: Host not found!");
-	
-	UserAgent = Find(Buffer, "UserAgent");
-	
-}
-
-proZPRd::HTTPRequest::Lines_t proZPRd::HTTPRequest::toLines_t(const std::string & Request)
-{
-	Lines_t Buffer;
-	unsigned int Position = 0;
-	unsigned int Temp;
-	
-	while((Temp = Request.find("\r", Position)) != std::string::npos)
-	{	
-		Buffer.push_back(Request.substr(Position, Temp - Position));
-		Position = Temp + 2; //Przesuwamy wskaznik w stringu za znaki \r\n
-	}
-	
-	return Buffer;
-}
-
-std::string proZPRd::HTTPRequest::Find(const Lines_t & Request, const std::string & Header)
-{
-	unsigned int i;
-	unsigned int Position;
-	unsigned int Size = Request.size();
-	
-	for(i = 1; i < Size; ++i) //Pozycja 0 nas nie interesuje
+	AllRequestHeaders.reserve(Lines.size() - 1);
+	for(auto LineIterator = Lines.begin() + 1; LineIterator != Lines.end(); LineIterator++)
 	{
-		if((Position = Request[i].find(": ")) != std::string::npos)
-		{
-			if(Request[i].substr(0, Position) == Header)
-				return Request[i].substr(Position + 2); // +3 zeby zaczac dzielic stringa od pierwszego znaku za ": "
-		}
+		size_t ColonPosition = LineIterator->find(HeaderDelimiter);
+		if(ColonPosition == std::string::npos)
+			continue;
+		
+		AllRequestHeaders.insert(std::make_pair(LineIterator->substr(0, ColonPosition), LineIterator->substr(ColonPosition + HeaderDelimiter.length())));
 	}
+	
+	URL = RequestParts[1];
+	
+	try	{ Host = AllRequestHeaders.at("Host"); }
+	catch(const std::out_of_range &) { throw Tools::Exception(EXCEPTION_PARAMS, "No Host field present in request"); }
+	
+	try	{ UserAgent = AllRequestHeaders.at("User-Agent"); }
+	catch(const std::out_of_range &) {}
+	
+}
 
-	return "";
+std::string proZPRd::HTTPRequest::GetURL() const
+{
+	return URL;
+}
+std::string proZPRd::HTTPRequest::GetHost() const
+{
+	return Host;
+}
+std::string proZPRd::HTTPRequest::GetUserAgent() const
+{
+	return UserAgent;
 }

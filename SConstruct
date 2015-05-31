@@ -39,7 +39,7 @@ if Debug:
 else:
 	BinDirectory = os.path.join(BinDirectory, "Release")
 	E.Append(CXXFLAGS = "-O2")
-	E.Append(LINKFLAGS = "-s")
+	E.Append(LINKFLAGS = "-O2 -s")
 
 if os.name == 'nt':
 	E.Append(LINKFLAGS = "-static")

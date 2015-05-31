@@ -1,0 +1,10 @@
+GET /wiki/Kod_odpowiedzi_HTTP HTTP/1.1
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:38.0) Gecko/20100101 Firefox/38.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: pl,en-US;q=0.7,en;q=0.3
+Accept-Encoding: gzip, deflate
+Referer: http://www.google.pl/url?sa=t&rct=j&q=&esrc=s&source=web&cd=2&ved=0CC4QFjAB&url=http%3A%2F%2Fpl.wikipedia.org%2Fwiki%2FKod_odpowiedzi_HTTP&ei=kgBrVd2GCoK1sQHTjoHQDw&usg=AFQjCNFQq7cpXW4aE5c-H6jtiQbazt2rMw&sig2=R9I7fHc5xbkxYW4eo99peg&bvm=bv.94455598,d.bGg
+Cookie: centralnotice_only2times_tou=2; centralnotice_only2times_tou-wait=6%7C1405892571327%7C0; centralnotice_bannercount_wikimania14=2; centralnotice_bannercount_wikimania14-wait=0%7C0%7C2; centralnotice_buckets_by_campaign=%7B%22wle%202015-pl%22%3A%7B%22val%22%3A0%2C%22start%22%3A1430431200%2C%22end%22%3A1435701540%7D%7D; strategy2015_only5times_A=3; strategy2015_only5times_A-wait=0%7C0%7C3; centralnotice_bannercount_WMPL_OPP_2015=2; centralnotice_bannercount_WMPL_OPP_2015b=2; WMF-Last-Access=31-May-2015; GeoIP=PL:Warsaw:52.2500:21.0000:v4; uls-previous-languages=%5B%22pl%22%5D; mediaWiki.user.sessionId=a05928744aaabf87
+Connection: keep-alive
+Cache-Control: max-age=0
+
