@@ -16,13 +16,13 @@ namespace proZPRd
 			/**
 				Statyczna metoda zamieniająca kod odpowiedzi HTTP na jego postać tekstową
 			*/
-			static std::string HttpResponseCodeToString(const unsigned short HttpResponseCode);
+			static std::string ResponseCodeToString(const unsigned short ResponseCode);
 			
 		private:
 			/**
 				Metoda zwracająca kod odpowiedzi HTTP
 			*/
-			virtual unsigned short GetHttpResponseCode() const = 0;
+			virtual unsigned short GetResponseCode() const = 0;
 			
 			/**
 				Metoda zwracająca dodatkowe nagłówki które mają zosta
