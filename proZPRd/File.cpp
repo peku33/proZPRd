@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <string>
 #include <sys/stat.h>
+#include <time.h>
 #include <fstream>
 #include "Tools/Exception.hpp"
 
@@ -81,3 +82,11 @@ proZPRd::File::FileStruct proZPRd::File::SplitFileName(const std::string & FileN
 	std::size_t LastDotPosition = FileName.find_last_of(".");
 	return (FileStruct) {FileName.substr(0, LastDotPosition), FileName.substr(LastDotPosition + 1)};
 } 
+
+std::string proZPRd::File::GetETag(const std::string & FileName)
+{
+	struct stat S;	
+	stat(FileName.c_str(), &S);
+	
+	return std::to_string(S.st_mtime);
+}

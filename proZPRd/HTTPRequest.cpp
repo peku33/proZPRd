@@ -47,6 +47,9 @@ proZPRd::HTTPRequest::HTTPRequest(const std::string & Request)
 	try	{ UserAgent = AllRequestHeaders.at("User-Agent"); }
 	catch(const std::out_of_range &) {}
 	
+	try { IfNoneMatch = AllRequestHeaders.at("If-None-Match"); }
+	catch(const std::out_of_range &) {}
+	
 }
 
 std::string proZPRd::HTTPRequest::GetURL() const
@@ -60,4 +63,8 @@ std::string proZPRd::HTTPRequest::GetHost() const
 std::string proZPRd::HTTPRequest::GetUserAgent() const
 {
 	return UserAgent;
+}
+std::string proZPRd::HTTPRequest::GetIfNoneMatch() const
+{
+	return IfNoneMatch;
 }

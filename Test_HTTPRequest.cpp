@@ -18,6 +18,7 @@ int main(int ArgC, char ** ArgV)
 		std::cout << R.GetURL() << std::endl;
 		std::cout << R.GetHost() << std::endl;
 		std::cout << R.GetUserAgent() << std::endl;
+		std::cout << R.GetIfNoneMatch() << std::endl;
 	}
 	catch(const std::exception & E)
 	{

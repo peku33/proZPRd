@@ -22,10 +22,12 @@ namespace proZPRd
 			std::string URL;
 			std::string Host;
 			std::string UserAgent;
+			std::string IfNoneMatch;
 		
 		public:
 			std::string GetURL() const;
 			std::string GetHost() const;
 			std::string GetUserAgent() const;
+			std::string GetIfNoneMatch() const;
 	};
 }
