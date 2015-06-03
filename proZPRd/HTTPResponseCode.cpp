@@ -10,7 +10,7 @@ unsigned short proZPRd::HTTPResponseCode::GetResponseCode() const
 }
 std::string proZPRd::HTTPResponseCode::GetContentType() const
 {
-	return "text/html; charset=UTF-8"
+	return "text/html; charset=UTF-8";
 }
 std::string proZPRd::HTTPResponseCode::GetContent() const
 {
