@@ -12,6 +12,7 @@ namespace proZPRd
 		class NoCopyU
 		{
 			public:
+				NoCopyU() {}
 				NoCopyU(const NoCopyU &) = delete;
 				NoCopyU & operator = (const NoCopyU &) = delete;
 		};
