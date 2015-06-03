@@ -3,8 +3,8 @@
 proZPRd::Strings::StringParts_t proZPRd::Strings::SplitString(const std::string & String, const std::string & Delimiter)
 {
 	StringParts_t StringParts;
-	unsigned int LastLineEndPosition = 0;
-	unsigned int ThisLineEndPosition = 0;
+	size_t LastLineEndPosition = 0;
+	size_t ThisLineEndPosition = 0;
 	
 	while(true)
 	{
