@@ -1,6 +1,6 @@
 #include <iostream>
 #include "proZPRd/File.hpp"
-#include "proZPRd/HttpRequest.hpp"
+#include "proZPRd/HTTPRequest.hpp"
 
 int main(int ArgC, char ** ArgV)
 {
