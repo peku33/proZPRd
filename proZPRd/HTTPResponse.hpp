@@ -25,6 +25,11 @@ namespace proZPRd
 			virtual unsigned short GetResponseCode() const = 0;
 			
 			/**
+				Metoda zwracająca zawartość nagłówka Content-Type
+			*/
+			virtual std::string GetContentType() const = 0;
+			
+			/**
 				Metoda zwracająca dodatkowe nagłówki które mają zosta
 			*/
 			virtual std::string GetContent() const = 0;
