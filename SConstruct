@@ -30,7 +30,7 @@ else:
 Debug = ARGUMENTS.get('DEBUG', 0)
 
 E.Append(CXXFLAGS = "-Wall -Wextra -std=c++11 -march=native -fdata-sections -ffunction-sections")
-E.Append(LINKFLAGS = "-pthread -Wl,--gc-sections")
+E.Append(LINKFLAGS = "-pthread -Wl,--gc-sections -lboost_system")
 
 BinDirectory = "Bin"
 if Debug:
