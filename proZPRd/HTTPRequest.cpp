@@ -4,6 +4,19 @@
 #include "Tools/Exception.hpp"
 #include <stdexcept>
 
+proZPRd::HTTPRequest proZPRd::HTTPRequest::TryParse(const std::string & Request)
+{
+	const std::string MustEndWith("\r\n\r\n");
+	
+	size_t Length = Request.length();
+	if(Length < MustEndWith.length())
+		throw HTTPRequestNotComplete();
+
+	if(Request.substr(Length - MustEndWith.length()) != MustEndWith)
+		throw HTTPRequestNotComplete();
+	
+	return HTTPRequest(Request);
+}
 proZPRd::HTTPRequest::HTTPRequest(const std::string & Request)
 {
 	// Linie z kolejnymi danymi
@@ -50,16 +63,6 @@ proZPRd::HTTPRequest::HTTPRequest(const std::string & Request)
 	try { RequestedETag = AllRequestHeaders.at("If-None-Match"); }
 	catch(const std::out_of_range &) {}
 	
-}
-
-proZPRd::HTTPRequest proZPRd::HTTPRequest::TryParse(const std::string & Request)
-{	
-	int Position = std::distance(Request.begin(), Request.end()) - 2;
-
-	if(Request.substr(Position) != "\n\n")
-		throw proZPRd::HTTPRequest::HTTPRequestNotComplete();
-	
-	return proZPRd::HTTPRequest(Request);
 }
 
 std::string proZPRd::HTTPRequest::GetURL() const
