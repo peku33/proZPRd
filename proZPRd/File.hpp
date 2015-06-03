@@ -47,8 +47,9 @@ namespace proZPRd
 			static FileStruct SplitFileName(const std::string & FileName);
 			
 			/**
-				Funkcja zwraca ETag pliku, czyli jego date ostatniej modyfikacji podana w sekundach ktore uplynely od 01.01.1970
-				*/
+				Zwraca klucz mogący posłużyć do identyfikacji czy nastąpiły zmiany w pliku. W tym konkretnym przypadku kluczem jest data modyfikacji
+				w postaci unix timestamp
+			*/
 			static std::string GetETag(const std::string & FileName);
 	};
 }

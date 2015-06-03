@@ -22,12 +22,15 @@ namespace proZPRd
 			std::string URL;
 			std::string Host;
 			std::string UserAgent;
-			std::string IfNoneMatch;
+			std::string RequestedETag;
 		
 		public:
+			class HTTPRequestNotComplete{ };
+
+			static HTTPRequest TryParse(const std::string & Request);
 			std::string GetURL() const;
 			std::string GetHost() const;
 			std::string GetUserAgent() const;
-			std::string GetIfNoneMatch() const;
+			std::string GetRequestedETag() const;
 	};
 }

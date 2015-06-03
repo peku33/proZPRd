@@ -47,9 +47,19 @@ proZPRd::HTTPRequest::HTTPRequest(const std::string & Request)
 	try	{ UserAgent = AllRequestHeaders.at("User-Agent"); }
 	catch(const std::out_of_range &) {}
 	
-	try { IfNoneMatch = AllRequestHeaders.at("If-None-Match"); }
+	try { RequestedETag = AllRequestHeaders.at("If-None-Match"); }
 	catch(const std::out_of_range &) {}
 	
+}
+
+proZPRd::HTTPRequest proZPRd::HTTPRequest::TryParse(const std::string & Request)
+{	
+	int Position = std::distance(Request.begin(), Request.end()) - 2;
+
+	if(Request.substr(Position) != "\n\n")
+		throw proZPRd::HTTPRequest::HTTPRequestNotComplete();
+	
+	return proZPRd::HTTPRequest(Request);
 }
 
 std::string proZPRd::HTTPRequest::GetURL() const
@@ -64,7 +74,7 @@ std::string proZPRd::HTTPRequest::GetUserAgent() const
 {
 	return UserAgent;
 }
-std::string proZPRd::HTTPRequest::GetIfNoneMatch() const
+std::string proZPRd::HTTPRequest::GetRequestedETag() const
 {
-	return IfNoneMatch;
+	return RequestedETag;
 }

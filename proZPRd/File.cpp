@@ -86,7 +86,8 @@ proZPRd::File::FileStruct proZPRd::File::SplitFileName(const std::string & FileN
 std::string proZPRd::File::GetETag(const std::string & FileName)
 {
 	struct stat S;	
-	stat(FileName.c_str(), &S);
+	if(stat(FileName.c_str(), &S) != 0)
+		throw Tools::Exception(EXCEPTION_PARAMS, "stat(" + FileName + ") failed...");
 	
 	return std::to_string(S.st_mtime);
 }
