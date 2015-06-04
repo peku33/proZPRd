@@ -15,9 +15,9 @@ namespace proZPRd
 	{
 		public:
 			/**
-			*	@brief Wyjątek rzucany przez metodę TryParse 
+			*	@brief Wyjątek rzucany przez metodę TryParse. 
 			*	
-			*	Wyjątek rzucany przez metodę TryParse oznaczający, że Request nie jest jeszcze kompletny i potrzebna jest większa ilość danych
+			*	Oznaczający, że Request nie jest jeszcze kompletny i potrzebna jest większa ilość danych
 			*/
 			class HTTPRequestNotComplete{ };
 			
