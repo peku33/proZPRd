@@ -34,10 +34,10 @@ namespace proZPRd
 			*/
 			enum class MessageType
 			{
-				OK,
-				INFO,
-				WARNING,
-				ERROR
+				Ok,
+				Info,
+				Warning,
+				Error
 			};
 			
 			/**

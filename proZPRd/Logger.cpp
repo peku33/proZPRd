@@ -7,19 +7,19 @@
 
 void proZPRd::Logger::Ok(const std::string & Message)
 {
-	Display(Message, MessageType::OK);
+	Display(Message, MessageType::Ok);
 }
 void proZPRd::Logger::Info(const std::string & Message)
 {
-	Display(Message, MessageType::INFO);
+	Display(Message, MessageType::Info);
 }
 void proZPRd::Logger::Warning(const std::string & Message)
 {
-	Display(Message, MessageType::WARNING);
+	Display(Message, MessageType::Warning);
 }
 void proZPRd::Logger::Error(const std::string & Message)
 {
-	Display(Message, MessageType::ERROR);
+	Display(Message, MessageType::Error);
 }
 void proZPRd::Logger::Display(const std::string & Message, const MessageType MT)
 {
@@ -45,11 +45,11 @@ void proZPRd::Logger::Display(const std::string & Message, const MessageType MT)
 }
 std::string proZPRd::Logger::MessageTypeToString(const MessageType MT)
 {
-	if(MT == MessageType::OK)
+	if(MT == MessageType::Ok)
 		return "Ok";
-	else if(MT == MessageType::INFO)
+	else if(MT == MessageType::Info)
 		return "Info";
-	else if(MT == MessageType::WARNING)
+	else if(MT == MessageType::Warning)
 		return "Warning";
 	else
 		return "Error";
