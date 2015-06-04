@@ -15,6 +15,9 @@ namespace proZPRd
 	class Strings : Tools::NoCreateU
 	{
 		public:
+			/**
+			*	std::vector<std::string> Wektor przechowujący substringi, po podzieleniu.
+			*/
 			typedef std::vector<std::string> StringParts_t;
 			/**
 			*	Funkcja służąca do podziału podanego string'a na części według podanego Delimiter'a.

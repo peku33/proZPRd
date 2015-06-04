@@ -36,7 +36,7 @@ namespace proZPRd
 			
 		private:
 			/**
-			*	Mapa przechowująca wszystkie elementy przysłane przez klienta
+			*	Mapa przechowująca wszystkie elementy przysłane przez klienta.
 			*/
 			std::unordered_map<std::string, std::string> AllRequestHeaders;
 			

@@ -18,6 +18,9 @@
 namespace proZPRd
 {
 	/**
+	*	@file
+	*	@version 1.0
+	*	@class Server
 	*	Klasa właściwego serwera HTTP
 	*/
 	class Server : public Tools::NoCopyU
@@ -26,10 +29,10 @@ namespace proZPRd
 			/**
 			*	Konstruktor.
 			*
-			*	ListenAddressStr - adres w postaci std::string pod którym serwer będzie nasłuchiwał
-			*	ListenPort - port na którym serwer będzie nasłuchiwał
-			*	ThreadsNum - ilość wątków roboczych które uruchomi Server
-			*	HRP - referencja do procesora zapytań, który zosanie przekazany wątkom
+			*	@param ListenAddressStr - adres w postaci std::string pod którym serwer będzie nasłuchiwał
+			*	@param ListenPort - port na którym serwer będzie nasłuchiwał
+			*	@param ThreadsNum - ilość wątków roboczych które uruchomi Server
+			*	@param HRP - referencja do procesora zapytań, który zosanie przekazany wątkom
 			*
 			*/
 			Server(const std::string & ListenAddressStr, const unsigned short ListenPort, const unsigned int ThreadsNum, const HTTPRequestProcessor & HRP);

@@ -26,6 +26,10 @@ namespace proZPRd
 			*/
 			static bool Exists(const std::string & DirectoryName);
 			
+			/**
+			*	Zwiera liste podkatalogów oraz plików.
+			*	Wpisy z katalogami oraz plikami przechowywane są w std::set.
+			*/
 			struct DirectoryEntries
 			{
 				std::set<std::string> Directories;

@@ -22,8 +22,8 @@ namespace proZPRd
 			/**
 			*	Konstruktor.
 			*	
-			*	Socket - deskryptor gniazda otrzymany z TCPSocketServer
-			*	RemoteAddress - adres klienta
+			*	@param Socket - deskryptor gniazda otrzymany z TCPSocketServer
+			*	@param RemoteAddress - adres klienta
 			*/
 			TCPSocketClient(const int Socket, const struct sockaddr_in & RemoteAddress);
 			
@@ -42,33 +42,33 @@ namespace proZPRd
 			/**
 			*	Odbiera dane od klienta
 			*	
-			*	Output - wskaźnik na bufor który odbierze dane
-			*	MaxLength - maksymalna ilość danych wpisana na raz do bufora
+			*	@param Output - wskaźnik na bufor który odbierze dane
+			*	@param MaxLength - maksymalna ilość danych wpisana na raz do bufora
 			*	
-			*	Zwraca długość odebranych danych
+			*	@return Zwraca długość odebranych danych
 			*/
 			size_t Read(char * Output, const size_t MaxLength);
 			
 			/**
 			*	Wysyła dane do klienta
 			*	
-			*	Input - wskaźnik na bufor zawierający dane do wysłania
-			*	Length - Długość danych do wysłania
+			*	@param Input - wskaźnik na bufor zawierający dane do wysłania
+			*	@param Length - Długość danych do wysłania
 			*/
 			void Write(const char * Input, const size_t Length);
 			
 			/**
-			*	Zwraca adres klienta w postaci adres IP z kropkami
+			*	@return Zwraca adres klienta w postaci adres IP z kropkami
 			*/
 			std::string GetRemoteIpStr() const;
 			
 			/**
-			*	Zwraca port klienta
+			*	@return Zwraca port klienta
 			*/
 			unsigned short GetRemotePort() const;
 			
 			/**
-			*	Zwraca adres + : + port klienta
+			*	@return Zwraca adres + : + port klienta
 			*/
 			std::string GetRemoteIpPortStr() const;
 	};

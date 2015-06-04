@@ -10,6 +10,9 @@
 namespace proZPRd
 {
 	/**
+	*	@file
+	*	@version 1.0
+	*	@class TCPSocketServer
 	*	Klasa opisująca gniazdo nasłuchujące na połączenia
 	*	Klasa posiada metodę Main() która będzie wołała podaną w parametrze funkcję wraz z każdym nowym połączeniem.
 	*/
@@ -25,8 +28,8 @@ namespace proZPRd
 			/**
 			*	Konstruktor
 			*	
-			*	Ip - adres IP do nasłuchiwania w postaci z kropkami
-			*	Port - port do nasłuchiwania
+			*	@param Ip - adres IP do nasłuchiwania w postaci z kropkami
+			*	@param Port - port do nasłuchiwania
 			*/
 			TCPSocketServer(const std::string & Ip, const unsigned short Port);
 			
@@ -57,7 +60,7 @@ namespace proZPRd
 			typedef std::function<void (NewClientPtr_t)> NewClient_f;
 		
 			/**
-			*	Funkcja która uruchomi główną pętlę oczekującą na połączenia
+			*	Metoda która uruchomi główną pętlę oczekującą na połączenia
 			*/
 			void Main(NewClient_f AcceptFunction) const;
 	};

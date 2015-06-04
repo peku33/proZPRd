@@ -5,6 +5,9 @@
 namespace proZPRd
 {
 	/**
+	*	@file
+	*	@version 1.0
+	*	@class HTTPResponseContent
 	*	Klasa opisująca odpowiedź serwera zawierającą treść
 	*/
 	class HTTPResponseContent : public HTTPResponse
@@ -13,9 +16,9 @@ namespace proZPRd
 			/**
 			*	Konstruktor.
 			*	
-			*	Content - właściwa zawartość treści
-			*	ContentType - wartość nagłówka Content-Type, wygenerowana na przykład poprzez GetContentTypeByExtension
-			*	ETag - zawartość nagłówka ETag. Jeśli .empty() - nagłówek nie zostanie wysłany
+			*	@param Content - właściwa zawartość treści
+			*	@param ContentType - wartość nagłówka Content-Type, wygenerowana na przykład poprzez GetContentTypeByExtension
+			*	@param ETag - zawartość nagłówka ETag. Jeśli .empty() - nagłówek nie zostanie wysłany
 			*/
 			HTTPResponseContent(const std::string & Content, const std::string & ContentType, const std::string & ETag);
 			
@@ -26,9 +29,11 @@ namespace proZPRd
 		
 		public:
 			/**
-			* Generuje zawartość nagłówka Content-Type na podstawie rozszerzenia.
-			* Posiada wewnętrzną bazę rozszerzeń
-			* W przypadku braku dopasowania zwraca domyślną wartość
+			*	Generuje zawartość nagłówka Content-Type na podstawie rozszerzenia.
+			*	Posiada wewnętrzną bazę rozszerzeń
+			*	W przypadku braku dopasowania zwraca domyślną wartość
+			*	@param Extension Rozszerzenie pliku. 
+			*	@return Zwraca zawartość w postaci std::string.
 			*/
 			static std::string GetContentTypeByExtension(const std::string & Extension);
 		

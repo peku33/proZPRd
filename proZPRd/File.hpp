@@ -33,7 +33,9 @@ namespace proZPRd
 			*	@return Zawartość pliku tekstowego jako std::string.
 			*/
 			static std::string ToString(const std::string & FileName);
-			
+			/**
+			*	std::vector<std::string> przechowuje linie pliku tekstowego. 
+			*/
 			typedef std::vector<std::string> Lines_t;
 			/**
 			*	Metoda wczytuje cały plik o podanej nazwie do pamięci i zwraca go w postaci Lines_t, czyli wektora zawierającego linie pliku
@@ -42,6 +44,9 @@ namespace proZPRd
 			*/
 			static Lines_t GetLines(const std::string & FileName);
 			
+			/**
+			*	Struktura reprezentująca plik. Przechowuje nazwę jako Name oraz rozszerzenie jako Extension
+			*/
 			struct FileStruct
 			{
 				std::string Name;
