@@ -7,7 +7,7 @@ proZPRd::HTTPResponseContent::HTTPResponseContent(const std::string & Content, c
 
 std::string proZPRd::HTTPResponseContent::GetContentTypeByExtension(const std::string & Extension)
 {
-	if(Extension == "html" || Extension == "htm")
+	if(Extension == "html" || Extension == "htm" || Extension == "php")
 		return "text/html; charset=UTF-8";
 	else if(Extension == "txt")
 		return "text/plain";
