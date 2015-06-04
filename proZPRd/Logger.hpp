@@ -7,11 +7,11 @@
 namespace proZPRd
 {
 	/**
-		
-		Klasa służąca do ładnego wypisawania do konsoli. Zawiera 4 typy wiadomości: Ok, Info, Warning, Error które będą różniły się między sobą prefixem / kolorem wyświetlanej wiadomości
-		
-		Zawiera wyłącznie metody statyczne
-		
+	*	@file
+	*	@version 1.0
+	*	@class Logger
+	*	Klasa służąca do ładnego wypisawania do konsoli. Zawiera 4 typy wiadomości: Ok, Info, Warning, Error które będą różniły się między sobą prefixem / kolorem wyświetlanej wiadomości	
+	*	Zawiera wyłącznie metody statyczne	
 	*/
 	class Logger : public Tools::NoCreateU
 	{
@@ -41,13 +41,16 @@ namespace proZPRd
 			};
 			
 			/**
-				Właściwa funkcja która wyświetla napisy.
-				Jako argumenty przyjmuje treść wiadomości i jej typ
+			*	Właściwa funkcja która wyświetla napisy.
+			*	@param Message treść wiadomości.
+			*	@param MT typ wiadomości.
 			*/
 			static void Display(const std::string & Message, const MessageType MT);
 			
 			/**
-				Funkcja konwertująca typ wiadomości do słownego opisu
+			*	Funkcja konwertująca typ wiadomości do słownego opisu
+			*	@param MT typ wiadomości.
+			*	@return Zwraca słowny opis typu wiadomości w postaci std::string.
 			*/
 			static std::string MessageTypeToString(const MessageType MT); 
 	};
