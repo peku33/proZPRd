@@ -12,7 +12,7 @@ MainDirectory = "." # Plików źródłowych z main() spodziewamy się w lokalnym
 ClassesDirectories = ["proZPRd"] # Katalogi w których ma poszukiwać plików źródłowych klas.
 
 # Koniec edytowalnych ustawień
-
+LinkLibs = []
 if os.name == 'nt':
 	E = Environment(tools = ['mingw'])
 	MinGwPathFileName = "MinGwPath.txt"
@@ -30,7 +30,7 @@ else:
 Debug = ARGUMENTS.get('DEBUG', 0)
 
 E.Append(CXXFLAGS = "-Wall -Wextra -std=c++11 -march=native -fdata-sections -ffunction-sections")
-E.Append(LINKFLAGS = "-pthread -Wl,--gc-sections -lboost_system")
+E.Append(LINKFLAGS = "-pthread -Wl,--gc-sections")
 
 BinDirectory = "Bin"
 if Debug:
@@ -43,6 +43,7 @@ else:
 
 if os.name == 'nt':
 	E.Append(LINKFLAGS = "-static")
+	LinkLibs += ['ws2_32']
 	
 
 # Stwórz katalog BinDirectory
@@ -88,7 +89,7 @@ for SourceFile, ObjectFile in MainPairs + ClassesPairs:
 # Dla każdego pliku z main() zlinkuj wszystkie obiekty klas z obiektem tego pliku main
 for MainSourceFile, MainObjectFile in MainPairs:
 	ExecutableFile = os.path.join(BinDirectory, os.path.splitext(MainSourceFile)[0]) # Nazwa pliki exe
-	E.Program(ExecutableFile, [MainObjectFile] + AllObjects)
+	E.Program(ExecutableFile, [MainObjectFile] + AllObjects, LIBS=LinkLibs)
 
 
 
