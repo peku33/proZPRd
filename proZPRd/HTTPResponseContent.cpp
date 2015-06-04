@@ -7,10 +7,22 @@ proZPRd::HTTPResponseContent::HTTPResponseContent(const std::string & Content, c
 
 std::string proZPRd::HTTPResponseContent::GetContentTypeByExtension(const std::string & Extension)
 {
-	/// TODO - uzupełnić dla typów: jpg, jpeg, gif, png, ico, js, txt, html (oraz htm), css
-	
 	if(Extension == "html" || Extension == "htm")
 		return "text/html; charset=UTF-8";
+	else if(Extension == "txt")
+		return "text/plain";
+	else if(Extension == "css")
+		return "text/css";
+	else if(Extension == "jpg" || Extension == "jpeg")
+		return "image/jpeg";
+	else if(Extension == "gif")
+		return "image/gif";
+	else if(Extension == "png")
+		return "image/png";
+	else if(Extension == "ico")
+		return "image/x-icon";
+	else if(Extension == "js")
+		return "application/javascript";
 	
 	return "application/octet-stream";
 }
