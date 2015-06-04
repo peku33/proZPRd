@@ -19,6 +19,7 @@ namespace proZPRd
 			*	std::vector<std::string> Wektor przechowujący substringi, po podzieleniu.
 			*/
 			typedef std::vector<std::string> StringParts_t;
+			
 			/**
 			*	Funkcja służąca do podziału podanego string'a na części według podanego Delimiter'a.
 			*	@param String String do podziału.
@@ -26,5 +27,12 @@ namespace proZPRd
 			*	@return Zwraca wektor który zawsze będzie zawierał przynajmniej jeden element
 			*/
 			static StringParts_t SplitString(const std::string & String, const std::string & Delimiter);
+			
+			/**
+			*	Funkcja usunie wszystkie białe znaki z początku i końca stringu
+			*	@param String String wejściowy
+			*	@return Napis z usuniętymi znakami
+			*/
+			static std::string Trim(const std::string & String);
 	};
 }

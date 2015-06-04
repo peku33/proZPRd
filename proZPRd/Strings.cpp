@@ -1,5 +1,7 @@
 #include "Strings.hpp"
 
+#include <algorithm>
+
 proZPRd::Strings::StringParts_t proZPRd::Strings::SplitString(const std::string & String, const std::string & Delimiter)
 {
 	StringParts_t StringParts;
@@ -23,4 +25,12 @@ proZPRd::Strings::StringParts_t proZPRd::Strings::SplitString(const std::string 
 	}
 	
 	return StringParts;
+}
+
+std::string proZPRd::Strings::Trim(const std::string & String)
+{
+	auto First = std::find_if(String.begin(), String.end(), isgraph);
+	auto Last = std::find_if(String.rbegin(), String.rend(), isgraph);
+	
+	return std::string(First, Last.base());
 }
