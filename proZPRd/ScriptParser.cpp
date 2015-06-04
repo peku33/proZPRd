@@ -11,7 +11,7 @@ proZPRd::ScriptParser::ScriptParser(const std::string & ParserExecutable): Parse
 {
 	
 }
-std::string proZPRd::ScriptParser::Parse(const std::string & ScriptName)
+std::string proZPRd::ScriptParser::Parse(const std::string & ScriptName) const
 {
 	if(!proZPRd::File::Exists(ScriptName))
 		throw Tools::Exception(EXCEPTION_PARAMS, "file: " + ScriptName + " not found!");

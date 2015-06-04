@@ -1,11 +1,10 @@
 #pragma once
 
-#include "Tools/NoCopyU.hpp"
 #include <string>
 
 namespace proZPRd
 {
-	class ScriptParser : public Tools::NoCopyU
+	class ScriptParser
 	{
 		public:
 			/**
@@ -23,6 +22,6 @@ namespace proZPRd
 			*	Metoda która uruchomi podany parser i wykona podany jako ScriptName skrypt
 			*	Zwraca wartość którą parser zwróci na wyjściu
 			*/
-			std::string Parse(const std::string & ScriptName);
+			std::string Parse(const std::string & ScriptName) const;
 	};
 }
