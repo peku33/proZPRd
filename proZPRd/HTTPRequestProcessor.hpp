@@ -5,6 +5,8 @@
 #include <unordered_map>
 #include "HTTPRequest.hpp"
 #include "HTTPResponse.hpp"
+#include <boost/regex.hpp>
+#include "ScriptParser.hpp"
 
 namespace proZPRd
 {
@@ -24,16 +26,28 @@ namespace proZPRd
 			*/
 			typedef std::unordered_map<std::string, std::string> HostMapping_t;
 			
+			/**
+			*	Typ mapy opisującej mapping Regex -> Ścieżka parsera
+			*/
+			typedef std::unordered_map<std::string, std::string> ParserMapping_t;
+			
 		public:
 			/**
 			*	Konstruktor
 			*	@param HostMapping przyjmuje jako argument std::unordered_map opisującą mapping Host: -> Folder
 			*/
-			HTTPRequestProcessor(const HostMapping_t & HostMapping);
+			HTTPRequestProcessor(const HostMapping_t & HostMapping, const ParserMapping_t & PM);
 		
 		private:
-			const HostMapping_t & HostMapping;
-		
+			const HostMapping_t HostMapping;
+			
+			/**
+			*	Wektor na podstawie którego będziemy dopasowywać.
+			*	Każdy element zawiera parę:
+			*		.first => skompilowany regex czekający na porównanie
+			*		.second => parser obsługujący zapytanie
+			*/
+			std::vector<std::pair<boost::regex, ScriptParser>> RunningRegexes;
 		public:
 			/**
 			*	Metoda która wytworzy odpowiedź na podstawie zapytania

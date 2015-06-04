@@ -7,11 +7,17 @@
 #include "File.hpp"
 
 #include <ctype.h>
-#include <iostream>
 
-proZPRd::HTTPRequestProcessor::HTTPRequestProcessor(const HostMapping_t & HostMapping): HostMapping(HostMapping)
+proZPRd::HTTPRequestProcessor::HTTPRequestProcessor(const HostMapping_t & HostMapping, const ParserMapping_t & PM): HostMapping(HostMapping)
 {
-	
+	/**
+		Kompilacja wyrażeń regularnych
+	*/
+	for(auto & Parser : PM)
+	{
+		boost::regex R(Parser.first);
+		RunningRegexes.push_back(std::make_pair(R, ScriptParser(Parser.second)));
+	}
 }
 proZPRd::HTTPResponse::HTTPResponsePtr proZPRd::HTTPRequestProcessor::Process(const HTTPRequest & HR) const
 {
@@ -41,6 +47,19 @@ proZPRd::HTTPResponse::HTTPResponsePtr proZPRd::HTTPRequestProcessor::Process(co
 	const std::string FilePath = File::FixSlashes(RootDirectory + URL);
 	if(!File::Exists(FilePath))
 		return HTTPResponse::HTTPResponsePtr(new HTTPResponseCode(404));
+	File::FileStruct FilePathStruct = File::SplitFileName(FilePath);
+		
+	/**
+		Plik istnieje, sprawdzamy parsowanie
+	*/
+	for(auto & Parser : RunningRegexes)
+	{
+		if(boost::regex_match(FilePath, Parser.first))
+		{
+			std::string ParserResult = Parser.second.Parse(FilePath);
+			return HTTPResponse::HTTPResponsePtr(new HTTPResponseContent(ParserResult, HTTPResponseContent::GetContentTypeByExtension(FilePathStruct.Extension), std::string()));
+		}
+	}
 	
 	/**
 		Plik istnieje, sprawdzamy ETag
@@ -51,7 +70,6 @@ proZPRd::HTTPResponse::HTTPResponsePtr proZPRd::HTTPRequestProcessor::Process(co
 		if(RequestETag == FileETag)
 			return HTTPResponse::HTTPResponsePtr(new HTTPResponseNotModified());
 	
-	File::FileStruct FilePathStruct = File::SplitFileName(FilePath);
 	std::string FileContent = File::ToString(FilePath);
 	return HTTPResponse::HTTPResponsePtr(new HTTPResponseContent(FileContent, HTTPResponseContent::GetContentTypeByExtension(FilePathStruct.Extension), FileETag));
 }
