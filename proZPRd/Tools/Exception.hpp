@@ -36,22 +36,20 @@ namespace proZPRd
 				virtual ~Exception();
 				
 			private:
-				const std::string PrettyFunction;
-				const std::string FileName;
-				const unsigned int Line;
-				const std::string Message;
+				std::string AsString;
 			
 			public:
 			/**
 			*	Metoda tworząca komunikat wyjątku w postaci std::string.
 			*	@return Zwraca wyjątek w postaci std::string.
 			*/
-				const std::string ToString() const;
+			const std::string ToString() const;
+			
 			/**
 			*	Metoda tworząca kominikat wyjątku tablicy znaków.
 			*	@return Zwraca wskaźnik do tablicy znaków.
 			*/
-				virtual const char * what() const noexcept;
+			virtual const char * what() const noexcept;
 		};
 	}
 }
