@@ -1,4 +1,11 @@
 #include "ScriptParser.hpp"
+#include "File.hpp"
+#include "Tools/Exception.hpp"
+
+#ifdef _WIN32
+  #define popen _popen
+  #define pclose _pclose
+#endif
 
 proZPRd::ScriptParser::ScriptParser(const std::string & ParserExecutable): ParserExecutable(ParserExecutable)
 {
@@ -6,14 +13,24 @@ proZPRd::ScriptParser::ScriptParser(const std::string & ParserExecutable): Parse
 }
 std::string proZPRd::ScriptParser::Parse(const std::string & ScriptName)
 {
-	//1. Sprawdź, czy ParserExecutable istnieje. Nie -> wyjątek
+	if(!proZPRd::File::Exists(ScriptName))
+		throw Tools::Exception(EXCEPTION_PARAMS, "file: " + ScriptName + "not found!");
 	
-	//2. Uruchamiasz proces parsera, przekierowujesz jego wyjście na swoje wejście.
-	//Jakiś względnie sprawny, ACZKOLWIEK NIE DO SKOPIOWANIA pomysł jest tu: http://stackoverflow.com/questions/478898/how-to-execute-a-command-and-get-output-of-command-within-c
+	FILE* ParserProcess = popen(ScriptName.c_str(), "r");
+    if (!ParserProcess)
+		throw Tools::Exception(EXCEPTION_PARAMS, "popen() failed!");
 	
-	//3. Sprawdzasz kod wyjścia programu -> zły -> wyjątek
+    char Buffer[128];
+    std::string Result("");
 	
-	//4. Jeśli ok - zwracasz to, co zwrócił program
+    while(!feof(ParserProcess)) 
+	{
+    	if(fgets(Buffer, 128, ParserProcess) != NULL)
+    		Result += Buffer;
+    }
 	
-	return std::string();
+    if(!pclose(ParserProcess))
+		throw Tools::Exception(EXCEPTION_PARAMS, ScriptName + " process returned an error!");
+	
+	return Result;
 }
