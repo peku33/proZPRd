@@ -21,12 +21,13 @@ std::string proZPRd::ScriptParser::Parse(const std::string & ScriptName)
 		throw Tools::Exception(EXCEPTION_PARAMS, "popen() failed!");
 	
     char Buffer[128];
-    std::string Result("");
+    std::string Result;
 	
     while(!feof(ParserProcess)) 
 	{
-    	if(fgets(Buffer, 128, ParserProcess) != NULL)
-    		Result += Buffer;
+    	auto Length = fread(Buffer, 1, sizeof(Buffer), ParserProcess);
+		if(Length > 0)
+			Result.append(Buffer, Length);
     }
 	
     if(pclose(ParserProcess) != 0)
