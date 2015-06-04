@@ -61,6 +61,7 @@ namespace proZPRd
 		
 			/**
 			*	Metoda która uruchomi główną pętlę oczekującą na połączenia
+			*	@param AcceptFunction przyjmuje jako argument std::function - fukncję obsługującą połączenia.
 			*/
 			void Main(NewClient_f AcceptFunction) const;
 	};
