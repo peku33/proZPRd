@@ -42,7 +42,7 @@ namespace proZPRd
 			static DirectoryEntries List(const std::string & DirectoryName);
 			
 			/**
-				Funkcja zwraca znak rozdzielający katalogi w zależności od platformy
+			*	Funkcja zwraca znak rozdzielający katalogi w zależności od platformy
 			*/
 			static std::string GetDirectorySeparator();
 	};

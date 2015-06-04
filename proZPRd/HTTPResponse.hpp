@@ -40,18 +40,15 @@ namespace proZPRd
 			virtual unsigned short GetResponseCode() const = 0;
 			
 			/**
-<<<<<<< HEAD
-			*	Metoda zwracająca zawartość nagłówka Content-Type
-			*	@return Zwraca zawartość nagłówka Content-Type jako std::string.
-=======
-				Metoda zwracająca ETag dla treści.
-				Domyślnie nie ma ETag'u - nieprzeciążona funkcja zwraca pustą wartość
+			*	Metoda zwracająca ETag dla treści.
+			*	Domyślnie nie ma ETag'u - nieprzeciążona funkcja zwraca pustą wartość
 			*/
 			virtual std::string GetETag() const;
 			
 			/**
-				Metoda zwracająca zawartość nagłówka Content-Type
->>>>>>> origin/master
+			*	Metoda zwracająca zawartość nagłówka Content-Type
+			*	Metoda zwracająca zawartość nagłówka Content-Type
+			*	@return Zwraca zawartość nagłówka Content-Type jako std::string.
 			*/
 			virtual std::string GetContentType() const = 0;
 			

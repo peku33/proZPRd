@@ -30,7 +30,7 @@ namespace proZPRd
 		
 		private:
 			/**
-				Typ wyliczeniowy służący do przekazywania rodzaju wiadomości do docelowej funkcji Display
+			*	Typ wyliczeniowy służący do przekazywania rodzaju wiadomości do docelowej funkcji Display
 			*/
 			enum class MessageType
 			{

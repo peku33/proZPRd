@@ -64,12 +64,12 @@ namespace proZPRd
 			static std::string GetETag(const std::string & FileName);
 			
 			/**
-				Zamienia ukośniki zgodnie z obecnym systemem operacyjnym.
-				Windows: / -> \
-				Pozostałe: \ -> /
-				
-				@param Path Ścieżka do pliku. 
-				@return Zwraca ścieżkę w postaci std::string.
+			*	Zamienia ukośniki zgodnie z obecnym systemem operacyjnym.
+			*	Windows: / -> \
+			*	Pozostałe: \ -> /
+			*	
+			*	@param Path Ścieżka do pliku. 
+			*	@return Zwraca ścieżkę w postaci std::string.
 			*/
 			static std::string FixSlashes(const std::string & Path);
 	};
