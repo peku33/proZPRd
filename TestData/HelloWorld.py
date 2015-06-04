@@ -1,0 +1,1 @@
+print 'This is HelloWorld from <b>Python</b>'
