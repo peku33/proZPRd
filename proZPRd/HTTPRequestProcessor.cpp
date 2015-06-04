@@ -57,7 +57,7 @@ proZPRd::HTTPResponse::HTTPResponsePtr proZPRd::HTTPRequestProcessor::Process(co
 		if(boost::regex_match(FilePath, Parser.first))
 		{
 			std::string ParserResult = Parser.second.Parse(FilePath);
-			return HTTPResponse::HTTPResponsePtr(new HTTPResponseContent(ParserResult, HTTPResponseContent::GetContentTypeByExtension(FilePathStruct.Extension), std::string()));
+			return HTTPResponse::HTTPResponsePtr(new HTTPResponseContent(ParserResult, HTTPResponseContent::GetContentTypeByExtension("html"), std::string()));
 		}
 	}
 	
