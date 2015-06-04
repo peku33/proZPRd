@@ -11,8 +11,9 @@ namespace proZPRd
 		/**
 		*	@file
 		*	@version 1.0
-		*	@class File
+		*	@class Exception
 		*	@brief Domyślna klasa wyjątków z której będziemy korzystać.
+		*
 		*	Makro EXCEPTION_PARAMS powoduje uzupełnienie trzech pierwszych parametrów automatycznymi wartościami.
 		*	Do uzupełnienia pozostaje ostatni - czwarty parametr Message w którym piszemy wiadomość związaną z rzucanym wyjątkiem.
 		*	
@@ -27,16 +28,16 @@ namespace proZPRd
 			public:
 			/**
 			*	Konstruktor klasy Exception.
-			*	@param File - Plik
+			*	@param FileName - Plik
 			*	@param Line - Numer lini
 			*	@param Message - Wiadomosc
 			*/
-				Exception(const std::string & PrettyFunction, const std::string & File, const unsigned int Line, const std::string & Message);
+				Exception(const std::string & PrettyFunction, const std::string & FileName, const unsigned int Line, const std::string & Message);
 				virtual ~Exception();
 				
 			private:
 				const std::string PrettyFunction;
-				const std::string File;
+				const std::string FileName;
 				const unsigned int Line;
 				const std::string Message;
 			

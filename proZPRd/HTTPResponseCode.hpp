@@ -8,11 +8,15 @@ namespace proZPRd
 	*	@file
 	*	@version 1.0
 	*	@class HTTPResponseCode
-	*	Klasa która zwróci stronę zawierającą informację o kodzie błędu.
+	*	@brief Klasa która zwróci stronę zawierającą informację o kodzie błędu.
 	*/
 	class HTTPResponseCode : public HTTPResponse
 	{
 		public:
+			/**
+			*	Konstruktor.
+			*	@param ResponseCode - kod błędu.
+			*/
 			HTTPResponseCode(const unsigned short ResponseCode);
 			
 		private:

@@ -10,7 +10,8 @@ namespace proZPRd
 	*	@file
 	*	@version 1.0
 	*	@class Directory
-	*	Klasa do obsługi podstawowych rzeczy związanych z katalogami.
+	*	@brief Klasa do obsługi podstawowych rzeczy związanych z katalogami.
+	*
 	*	Ponieważ nie istnieją póki co obiekty tej klasy - domyślnie dziedziczy ona po NoCreateU, który nie pozwala na ich utworzenie
 	*/
 	class Directory : public Tools::NoCreateU
@@ -27,7 +28,8 @@ namespace proZPRd
 			static bool Exists(const std::string & DirectoryName);
 			
 			/**
-			*	Zwiera liste podkatalogów oraz plików.
+			*	@brief Zwiera liste podkatalogów oraz plików.
+			*
 			*	Wpisy z katalogami oraz plikami przechowywane są w std::set.
 			*/
 			struct DirectoryEntries

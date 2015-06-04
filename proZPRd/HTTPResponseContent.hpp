@@ -8,14 +8,13 @@ namespace proZPRd
 	*	@file
 	*	@version 1.0
 	*	@class HTTPResponseContent
-	*	Klasa opisująca odpowiedź serwera zawierającą treść
+	*	@brief Klasa opisująca odpowiedź serwera zawierającą treść
 	*/
 	class HTTPResponseContent : public HTTPResponse
 	{
 		public:
 			/**
 			*	Konstruktor.
-			*	
 			*	@param Content - właściwa zawartość treści
 			*	@param ContentType - wartość nagłówka Content-Type, wygenerowana na przykład poprzez GetContentTypeByExtension
 			*	@param ETag - zawartość nagłówka ETag. Jeśli .empty() - nagłówek nie zostanie wysłany

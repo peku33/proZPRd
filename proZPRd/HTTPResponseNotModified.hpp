@@ -8,11 +8,14 @@ namespace proZPRd
 	*	@file
 	*	@version 1.0
 	*	@class HTTPResponseNotModified
-	*	Klasa opisująca odpowiedź HTTP 304 Not Modified
+	*	@brief Klasa opisująca odpowiedź HTTP 304 Not Modified
 	*/
 	class HTTPResponseNotModified : public HTTPResponse
 	{
 		public:
+		/**
+		*	Konstruktor.
+		*/
 			HTTPResponseNotModified();
 		
 		private:
