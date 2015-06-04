@@ -51,5 +51,12 @@ namespace proZPRd
 				w postaci unix timestamp
 			*/
 			static std::string GetETag(const std::string & FileName);
+			
+			/**
+				Zamienia ukośniki zgodnie z obecnym systemem operacyjnym.
+				Windows: / -> \
+				Pozostałe: \ -> /
+			*/
+			static std::string FixSlashes(const std::string & Path);
 	};
 }

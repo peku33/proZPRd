@@ -38,7 +38,7 @@ std::string proZPRd::File::ToString(const std::string & FileName)
 	while(!feof(F))
 	{
 		unsigned int BytesRead = fread(Buffer, sizeof(char), BufferSize, F);
-		if(BytesRead <= 0)
+		if(BytesRead <= 0 && !feof(F))
 		{
 			/*
 				Jeśli wystąpił błąd, przed rzuceniem wyjątku zamykamy plik, inaczej pozostanie otwarty na zawsze
@@ -89,5 +89,23 @@ std::string proZPRd::File::GetETag(const std::string & FileName)
 	if(stat(FileName.c_str(), &S) != 0)
 		throw Tools::Exception(EXCEPTION_PARAMS, "stat(" + FileName + ") failed...");
 	
-	return std::to_string(S.st_mtime);
+	return std::to_string(S.st_ino) + "-" + std::to_string(S.st_mtime);
+}
+
+std::string proZPRd::File::FixSlashes(const std::string & Path)
+{
+	#if defined(_WIN32)
+	const char What = '/';
+	const char With = '\\';
+	#else
+	const char What = '\\';
+	const char With = '/';
+	#endif
+	std::string PathCopy = Path;
+	for(auto & C : PathCopy)
+	{
+		if(C == What)
+			C = With;
+	}
+	return PathCopy;
 }
