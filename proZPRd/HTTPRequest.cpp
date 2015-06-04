@@ -60,7 +60,31 @@ proZPRd::HTTPRequest::HTTPRequest(const std::string & Request)
 	try	{ UserAgent = AllRequestHeaders.at("User-Agent"); }
 	catch(const std::out_of_range &) {}
 	
-	try { RequestedETag = AllRequestHeaders.at("If-None-Match"); }
+	try
+	{
+		RequestedETag = AllRequestHeaders.at("If-None-Match");
+		size_t ETagLength = RequestedETag.length();
+		if(ETagLength < 5)
+		{
+			RequestedETag = std::string();
+		}
+		else
+		{
+			const std::string ETagPrefix("W/");
+			if(RequestedETag.substr(0, ETagPrefix.length()) == ETagPrefix)
+			{
+				RequestedETag = RequestedETag.substr(ETagPrefix.length());
+				ETagLength -= ETagPrefix.length();
+			}
+			
+			if(RequestedETag[0] == '"' && RequestedETag[ETagLength - 1] == '"')
+			{
+				RequestedETag = RequestedETag.substr(1, ETagLength - 2);
+				ETagLength -= 2;
+			}
+				
+		}
+	}
 	catch(const std::out_of_range &) {}
 	
 }
