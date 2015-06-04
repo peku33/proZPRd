@@ -14,5 +14,5 @@ std::string proZPRd::HTTPResponseCode::GetContentType() const
 }
 std::string proZPRd::HTTPResponseCode::GetContent() const
 {
-	return "<h1 style=\"text-align: center\">" + std::to_string(ResponseCode) + " " + ResponseCodeToString(ResponseCode) + "</h1>";
+	return "<!DOCTYPE html><html><body style=\"text-align: center\"><h1>" + std::to_string(ResponseCode) + " " + ResponseCodeToString(ResponseCode) + "</h1><hr>proZPRd</body></html>";
 }
