@@ -12,7 +12,7 @@ MainDirectory = "." # Plików źródłowych z main() spodziewamy się w lokalnym
 ClassesDirectories = ["proZPRd"] # Katalogi w których ma poszukiwać plików źródłowych klas.
 
 # Koniec edytowalnych ustawień
-LinkLibs = []
+LinkLibs = ['boost_regex']
 if os.name == 'nt':
 	E = Environment(tools = ['mingw'])
 	MinGwPathFileName = "MinGwPath.txt"
