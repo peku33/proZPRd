@@ -14,7 +14,7 @@ proZPRd::ScriptParser::ScriptParser(const std::string & ParserExecutable): Parse
 std::string proZPRd::ScriptParser::Parse(const std::string & ScriptName)
 {
 	if(!proZPRd::File::Exists(ScriptName))
-		throw Tools::Exception(EXCEPTION_PARAMS, "file: " + ScriptName + "not found!");
+		throw Tools::Exception(EXCEPTION_PARAMS, "file: " + ScriptName + " not found!");
 	
 	FILE* ParserProcess = popen(ScriptName.c_str(), "r");
     if (!ParserProcess)
@@ -29,7 +29,7 @@ std::string proZPRd::ScriptParser::Parse(const std::string & ScriptName)
     		Result += Buffer;
     }
 	
-    if(!pclose(ParserProcess))
+    if(pclose(ParserProcess) != 0)
 		throw Tools::Exception(EXCEPTION_PARAMS, ScriptName + " process returned an error!");
 	
 	return Result;
