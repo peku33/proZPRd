@@ -2,67 +2,49 @@
 
 #include "Tools/NoCopyU.hpp"
 
-#include <boost/asio/io_service.hpp>
-#include <boost/asio/signal_set.hpp>
-#include <boost/asio/ip/tcp.hpp>
-#include <boost/asio/ip/address.hpp>
+#include <string>
+#include "HTTPRequestProcessor.hpp"
 
-#include "ServerThread.hpp"
+#include "TCPSocketServer.hpp"
+
 #include <queue>
 #include <mutex>
 #include <condition_variable>
+
+#include <vector>
+#include <memory>
+#include "ServerThread.hpp"
 
 namespace proZPRd
 {
 	class Server : public Tools::NoCopyU
 	{
 		public:
-			Server(const std::string & ListenAddressStr, const unsigned short ListenPort, const unsigned int ThreadsNum);
+			Server(const std::string & ListenAddressStr, const unsigned short ListenPort, const unsigned int ThreadsNum, const HTTPRequestProcessor & HRP);
+			~Server();
 			
 		private:
-			const std::string & ListenAddressStr;
-			const unsigned short ListenPort;
+			const HTTPRequestProcessor & HRP;
 		
 		public:
 			void Run();
 		
-		/**
-			Elementy sieciowe
-		*/
 		private:
-			/**
-				Zarządca głównej pętli przetwarzającej przychodzące dane
-			*/
-			boost::asio::io_service IS;
+			static void SignalHandler(int Signal);
 			
-			/**
-				Zestaw sygnałów kończących działanie programu
-			*/
-			boost::asio::signal_set SS;
-			
-			/**
-				Akcaptor połączeń TCP
-			*/
-			boost::asio::ip::tcp::acceptor AC;
-			
-			/**
-				Socket który przyjmie przychodzące połaczenie
-			*/
-			boost::asio::ip::tcp::socket NewClientSocket;
-		
 		private:
-			void CreateAcceptor();
-			void CreateQuitter();
+			const TCPSocketServer TSS;
+			void OnNewClient(TCPSocketServer::NewClientPtr_t NewClient);
 		
 		/**
-			Obsługa wątków
+			Wątki
 		*/
 		private:
-			std::queue<boost::asio::ip::tcp::socket> SocketQueue;
-			std::mutex SocketQueueMutex;
-			std::condition_variable SocketQueueNotEmpty;
+			std::queue<TCPSocketServer::NewClientPtr_t> NewClientsQueue;
+			std::mutex NewClientsQueueMutex;
+			std::condition_variable NewClientsNewData;
 			
 			volatile bool ShouldExit;
-			std::vector<std::unique_ptr<ServerThread>> ServerThreads;
+			std::vector<std::unique_ptr<ServerThread>> Threads;
 	};
 }

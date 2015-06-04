@@ -1,77 +1,43 @@
 #include "Server.hpp"
 
+#include <signal.h>
 #include "Logger.hpp"
+#include "Tools/Exception.hpp"
+#include <string.h>
 
-proZPRd::Server::Server(const std::string & ListenAddressStr, const unsigned short ListenPort, const unsigned int ThreadsNum = 0):
-	ListenAddressStr(ListenAddressStr), ListenPort(ListenPort),
-	IS(), SS(IS, SIGINT, SIGTERM, SIGQUIT), AC(IS, boost::asio::ip::tcp::endpoint(boost::asio::ip::address::from_string(ListenAddressStr), ListenPort)), NewClientSocket(IS),
-	ShouldExit(false)
+proZPRd::Server::Server(const std::string & ListenAddressStr, const unsigned short ListenPort, const unsigned int ThreadsNum, const HTTPRequestProcessor & HRP): HRP(HRP), TSS(ListenAddressStr, ListenPort), ShouldExit(false)
 {
-	CreateQuitter();
-	CreateAcceptor();
+	signal(SIGINT, &proZPRd::Server::SignalHandler);
+	signal(SIGTERM, &proZPRd::Server::SignalHandler);
 	
 	for(unsigned int I = 0; I < ThreadsNum; I++)
-		ServerThreads.push_back(std::unique_ptr<ServerThread>(new ServerThread(I, &ShouldExit, SocketQueue, SocketQueueMutex, SocketQueueNotEmpty)));
+		Threads.push_back(std::unique_ptr<ServerThread>(new ServerThread(I, &ShouldExit, HRP, NewClientsQueue, NewClientsQueueMutex, NewClientsNewData)));
+}
+proZPRd::Server::~Server()
+{
+	ShouldExit = true;
 	
-	AC.listen();
+	NewClientsNewData.notify_all();
+	
+	Threads.clear();
 }
 void proZPRd::Server::Run()
 {
-	IS.run();
+	TSS.Main(std::bind(&proZPRd::Server::OnNewClient, this, std::placeholders::_1));
 }
-void proZPRd::Server::CreateAcceptor()
+void proZPRd::Server::SignalHandler(int)
 {
-	AC.async_accept(NewClientSocket, [&] (const boost::system::error_code & ErrorCode)
-	{
-		/**
-			Czy nie zatrzymał nas sygnał?
-		*/
-		if(!AC.is_open())
-			return;
-		
-		/**
-			Jeśli błąd, to nie kontynnujemy
-		*/
-		if(ErrorCode)
-			return;
-		
-		Logger::Ok("New connection from: " + NewClientSocket.remote_endpoint().address().to_string() + ":" + std::to_string(NewClientSocket.remote_endpoint().port()));
-		
-		std::unique_lock<std::mutex> SocketQueueLock(SocketQueueMutex);
-			
-			SocketQueue.emplace(std::move(NewClientSocket));
-			SocketQueueNotEmpty.notify_one();
-		
-		SocketQueueLock.unlock();
-		
-		/**
-			Stwórz nowy akceptor
-		*/
-		CreateAcceptor();
-	});
+	
 }
-void proZPRd::Server::CreateQuitter()
+void proZPRd::Server::OnNewClient(TCPSocketServer::NewClientPtr_t NewClient)
 {
-	SS.async_wait([&] (const boost::system::error_code &, int)
-	{
-		/**
-			Przestajemy przyjmować nowe połączenia
-		*/
-		AC.close();
-		
-		/**
-			Ustawiamy flagę zamknięcia programu
-		*/
-		ShouldExit = true;
-		
-		/**
-			Odwieszamy wszystkie procesy
-		*/
-		SocketQueueNotEmpty.notify_all();
-		
-		/**
-			Zamykamy wszystkie wątki
-		*/
-		ServerThreads.clear();
-	});
+	if(!NewClient)
+		throw Tools::Exception(EXCEPTION_PARAMS, "NewClient is null");
+	
+	std::unique_lock<std::mutex> NewClientsQueueLock(NewClientsQueueMutex);
+	
+		NewClientsQueue.emplace(std::move(NewClient));
+		NewClientsNewData.notify_one();
+	
+	NewClientsQueueLock.unlock();
 }
