@@ -1,52 +1,53 @@
 #include "IniParser.hpp"
 #include "Tools/Exception.hpp"
-
+#include "Strings.hpp"
 
 proZPRd::IniParser::IniParser(const std::string & Input)
 {
 	
-	if(Input.find("directory", 0) == std::string::npos)
-		throw Tools::Exception(EXCEPTION_PARAMS, "Ini parser syntax error: directory settings not found");
-	
-	unsigned DirEnd;
-	if((DirEnd = Input.find("\n", 11)) == std::string::npos)
-		throw Tools::Exception(EXCEPTION_PARAMS, "Ini parser syntax error: directory settings not found");
-	Dir = Input.substr(10, DirEnd - 10);
-	
-	unsigned ErrorlogPos;
-	if((ErrorlogPos=Input.find("errorlog", 0)) == std::string::npos)
-		throw Tools::Exception(EXCEPTION_PARAMS, "Ini parser syntax error: errorlog settings not found");
-	
-	unsigned ErrorlogEnd;
-	if((ErrorlogEnd = Input.find("\n", ErrorlogPos + 9)) == std::string::npos)
-		throw Tools::Exception(EXCEPTION_PARAMS, "Ini parser syntax error: errorlog settings not found");
-	Errorlog = Input.substr(ErrorlogPos + 9,ErrorlogEnd  -  ErrorlogPos - 9);
-	
-	unsigned PortPos;
-	if((PortPos=Input.find("port", 0)) == std::string::npos)
-		throw Tools::Exception(EXCEPTION_PARAMS, "Ini parser syntax error: port settings not found");
-	
-	unsigned PortEnd;
-	if((PortEnd = Input.find("\n", PortPos + 5)) == std::string::npos)
-		throw Tools::Exception(EXCEPTION_PARAMS, "Ini parser syntax error: port settings not found");
-	Port = std::stoi(Input.substr(PortPos + 4,PortEnd  -  PortPos - 4));
-	
-	unsigned ThreadsPos;
-	if((ThreadsPos=Input.find("threads", 0)) == std::string::npos)
-		throw Tools::Exception(EXCEPTION_PARAMS, "Ini parser syntax error: threads settings not found");
-	
-	unsigned ThreadsEnd;
-	if((ThreadsEnd = Input.find("\n", ThreadsPos + 7)) == std::string::npos)
-		throw Tools::Exception(EXCEPTION_PARAMS, "Ini parser syntax error: threads settings not found");
-	Threads = std::stoi(Input.substr(ThreadsPos + 7,ThreadsEnd  -  ThreadsPos - 7));
-	
-	unsigned ParserPos;
-	unsigned ParserEnd;
-	while((ParserPos=Input.find("addparser", 0)) != std::string::npos)
+	auto Lines = Strings::SplitString(Input, "\n");
+	int SizeOfLines = Lines.size() - 1;
+	std::string LineParts;
+	Threads = 0;
+	Port = 0;
+	while(SizeOfLines >= 0)
 	{
-		if((ParserEnd = Input.find("\n", ParserPos +10)) == std::string::npos)
-			throw Tools::Exception(EXCEPTION_PARAMS, "Ini parser syntax error: additional parser settings not found");
-		AdditionalParsers.insert(Input.substr(ParserPos + 9,ParserEnd  -  ParserPos - 9));
+		LineParts = Strings::SplitString(Lines[SizeOfLines], "=");
+		
+		if((LineParts[0] == "directory") && (LineParts.size() == 3))
+		{
+			Dir.insert(std::pair<std::string, std::string>(LineParts[1], LineParts[2]));
+		}
+		else if((LineParts[0] == "errorlog") && (LineParts.size() == 2))
+		{
+			Errorlog = LineParts[1];
+		}
+		else if((LineParts[0] == "port") && (LineParts.size() == 2))
+		{
+			Port = std::stoi(LineParts[1]);
+		}
+		else if((LineParts[0] == "threads") && (LineParts.size() == 2))
+		{
+			Threads = std::stoi(LineParts[1]);
+		}
+		else if((LineParts[0] == "addparser") && (LineParts.size() == 2))
+		{
+			AdditionalParsers.insert(LineParts[1]);
+		}
+		else if((LineParts[0] == "#" || LineParts[0] == "\n"))
+		{
+			continue;
+		}
+		else
+		{
+			throw Tools::Exception(EXCEPTION_PARAMS, "Ini parser syntax error");
+		}
+		--SizeOfLines;
 	}
 	
+	if(Dir.size() == 0 || Port == 0 || Threads == 0 || Errorlog.size() == 0)
+	{
+		throw Tools::Exception(EXCEPTION_PARAMS, "Ini parser syntax error: some parameters are missing. Please provide them.");
+	}
+		
 } 

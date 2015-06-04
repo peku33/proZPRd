@@ -6,7 +6,10 @@
 namespace proZPRd
 {
 	/**
-		Klasa parsująca otrzymane zapytania HTTP, umożliwiająca ich łatwą obsługę.
+	*	@file
+	*	@version 1.0
+	*	@class HTTPRequest
+	*	Klasa parsująca otrzymane zapytania HTTP, umożliwiająca ich łatwą obsługę.
 	*/
 	class HTTPRequest
 	{
@@ -16,7 +19,8 @@ namespace proZPRd
 			
 		public:
 			/**
-				Konstruktor przyjmuje w argumentach wywołania zapytanie HTTP i przypisuje dane z niego do odpowiednich zmiennych klasy.
+			*	Konstruktor przyjmuje w argumentach wywołania zapytanie HTTP i przypisuje dane z niego do odpowiednich zmiennych klasy.
+			*	@param Request Zapytanie HTTP.
 			*/
 			HTTPRequest(const std::string & Request);
 		private:
@@ -28,9 +32,21 @@ namespace proZPRd
 			std::string RequestedETag;
 		
 		public:
+			/**
+			*	@return Metoda zwraca URL.
+			*/
 			std::string GetURL() const;
+			/**
+			*	@return Metoda zwraca Host.
+			*/
 			std::string GetHost() const;
+			/**
+			*	@return Metoda zwraca nazwę aplikacji klienckiej HTTP.
+			*/
 			std::string GetUserAgent() const;
+			/**
+			*	@return Metoda zwraca entity tag.
+			*/
 			std::string GetRequestedETag() const;
 	};
 }

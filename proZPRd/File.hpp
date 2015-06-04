@@ -18,7 +18,7 @@ namespace proZPRd
 	{
 		public:
 			/**
-			*	Funkcja ma sprawdzić czy podany plik istnieje i czy jest plikiem.
+			*	Metoda ma sprawdzić czy podany plik istnieje i czy jest plikiem.
 			*	
 			*	@param FileName Nazwa pliku.
 			*	@return Jeśli istnieje i jest plikiem - zwraca true. Jeśli nie istnieje lub nie jest plikiem - zwraca false.
@@ -27,7 +27,7 @@ namespace proZPRd
 			
 			
 			/**
-			*	Funkcja ma wczytać cały plik o podanej nazwie do pamięci i zwrócić go w postaci std::string.
+			*	Metoda ma wczytać cały plik o podanej nazwie do pamięci i zwrócić go w postaci std::string.
 			*	Jeśli plik nie istnieje ma rzucić Tool::Exception z odpowiednimi parametrami
 			*	@param FileName Nazwa pliku.
 			*	@return Zawartość pliku tekstowego jako std::string.
@@ -36,7 +36,7 @@ namespace proZPRd
 			
 			typedef std::vector<std::string> Lines_t;
 			/**
-			*	Funkcja wczytuje cały plik o podanej nazwie do pamięci i zwraca go w postaci Lines_t, czyli wektora zawierającego linie pliku
+			*	Metoda wczytuje cały plik o podanej nazwie do pamięci i zwraca go w postaci Lines_t, czyli wektora zawierającego linie pliku
 			*	@param FileName Nazwa pliku. 
 			*	@return Zawartość pliku tekstowego z podziałem na linie jako std::vector<std::string>.
 			*/
@@ -48,7 +48,7 @@ namespace proZPRd
 				std::string Extension;
 			};
 			/**
-			*	Funkcja ma podzielić nazwę pliku na nazwę i rozszerzenie.
+			*	Metoda ma podzielić nazwę pliku na nazwę i rozszerzenie.
 			*	Jeśli plik nie ma rozszerzenia, pozostaje ono puste.
 			*	@param FileName Nazwa pliku. 
 			*	@return Struktura przechowująca nazwę pliku oraz rozszerzenie.
