@@ -9,19 +9,28 @@ namespace proZPRd
 	namespace Tools
 	{
 		/**
-			Domyślna klasa wyjątków z której będziemy korzystać.
-			Makro EXCEPTION_PARAMS powoduje uzupełnienie trzech pierwszych parametrów automatycznymi wartościami.
-			Do uzupełnienia pozostaje ostatni - czwarty parametr Message w którym piszemy wiadomość związaną z rzucanym wyjątkiem.
-			
-			Użycie:
-			
-			(...)
-			throw Tools::Exception(EXCEPTION_PARAMS, "Wystapil straszny blad!");
-			(...)
+		*	@file
+		*	@version 1.0
+		*	@class File
+		*	@brief Domyślna klasa wyjątków z której będziemy korzystać.
+		*	Makro EXCEPTION_PARAMS powoduje uzupełnienie trzech pierwszych parametrów automatycznymi wartościami.
+		*	Do uzupełnienia pozostaje ostatni - czwarty parametr Message w którym piszemy wiadomość związaną z rzucanym wyjątkiem.
+		*	
+		*	Użycie:
+		*	
+		*	(...)
+		*	throw Tools::Exception(EXCEPTION_PARAMS, "Wystapil straszny blad!");
+		*	(...)
 		*/
 		class Exception : public std::exception
 		{
 			public:
+			/**
+			*	Konstruktor klasy Exception.
+			*	@param File - Plik
+			*	@param Line - Numer lini
+			*	@param Message - Wiadomosc
+			*/
 				Exception(const std::string & PrettyFunction, const std::string & File, const unsigned int Line, const std::string & Message);
 				virtual ~Exception();
 				
@@ -32,7 +41,15 @@ namespace proZPRd
 				const std::string Message;
 			
 			public:
+			/**
+			*	Metoda tworząca komunikat wyjątku w postaci std::string.
+			*	@return Zwraca wyjątek w postaci std::string.
+			*/
 				const std::string ToString() const;
+			/**
+			*	Metoda tworząca kominikat wyjątku tablicy znaków.
+			*	@return Zwraca wskaźnik do tablicy znaków.
+			*/
 				virtual const char * what() const noexcept;
 		};
 	}
