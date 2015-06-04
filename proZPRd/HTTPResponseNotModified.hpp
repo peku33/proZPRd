@@ -4,6 +4,9 @@
 
 namespace proZPRd
 {
+	/**
+	*	Klasa opisująca odpowiedź HTTP 304 Not Modified
+	*/
 	class HTTPResponseNotModified : public HTTPResponse
 	{
 		public:

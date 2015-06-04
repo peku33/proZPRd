@@ -19,19 +19,8 @@ namespace proZPRd
 			const unsigned short ResponseCode;
 		
 		private:
-			/**
-			*	Metoda zwracająca kod odpowiedzi HTTP
-			*	@return Zwraca kod odpowiedzi. 
-			*/
 			virtual unsigned short GetResponseCode() const;
-			/**
-			*	Metoda zwracająca zawartość nagłówka Content-Type
-			*	@return Zwraca zawartość nagłówka Content-Type jako std::string.
-			*/
 			virtual std::string GetContentType() const;
-			/**
-			*	Metoda zwracająca dodatkowe nagłówki które mają zostać.
-			*/
 			virtual std::string GetContent() const;
 	};
 }
