@@ -9,7 +9,7 @@ namespace proZPRd
 	*	@file
 	*	@version 1.0
 	*	@class HTTPResponse
-	* 	Klasa zwracająca odpowiedź na zapytanie HTTP. 
+	* 	@brief Klasa zwracająca odpowiedź na zapytanie HTTP. 
 	*/
 	class HTTPResponse
 	{

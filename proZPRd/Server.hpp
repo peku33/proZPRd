@@ -21,7 +21,8 @@ namespace proZPRd
 	*	@file
 	*	@version 1.0
 	*	@class Server
-	*	Klasa właściwego serwera HTTP
+	*	@brief Klasa właściwego serwera HTTP
+	*
 	*/
 	class Server : public Tools::NoCopyU
 	{

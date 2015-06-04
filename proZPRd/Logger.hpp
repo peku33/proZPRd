@@ -10,7 +10,9 @@ namespace proZPRd
 	*	@file
 	*	@version 1.0
 	*	@class Logger
-	*	Klasa służąca do ładnego wypisawania do konsoli. Zawiera 4 typy wiadomości: Ok, Info, Warning, Error które będą różniły się między sobą prefixem / kolorem wyświetlanej wiadomości	
+	*	@brief Klasa służąca do ładnego wypisawania do konsoli. 
+	*
+	*	Zawiera 4 typy wiadomości: Ok, Info, Warning, Error które będą różniły się między sobą prefixem / kolorem wyświetlanej wiadomości	
 	*	Zawiera wyłącznie metody statyczne	
 	*/
 	class Logger : public Tools::NoCreateU

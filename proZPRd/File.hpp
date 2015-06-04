@@ -45,7 +45,9 @@ namespace proZPRd
 			static Lines_t GetLines(const std::string & FileName);
 			
 			/**
-			*	Struktura reprezentująca plik. Przechowuje nazwę jako Name oraz rozszerzenie jako Extension
+			*	@brief Struktura reprezentująca plik. 
+			*
+			*	Przechowuje nazwę jako Name oraz rozszerzenie jako Extension
 			*/
 			struct FileStruct
 			{

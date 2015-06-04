@@ -17,7 +17,7 @@ namespace proZPRd
 	*	@file
 	*	@version 1.0
 	*	@class TCPSocketClient
-	*	Klasa opisująca gniazdo komunikacyjne serwer-klient
+	*	@brief Klasa opisująca gniazdo komunikacyjne serwer-klient
 	*/
 	class TCPSocketClient : public Tools::NoCopyU
 	{

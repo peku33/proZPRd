@@ -13,7 +13,8 @@ namespace proZPRd
 	*	@file
 	*	@version 1.0
 	*	@class TCPSocketServer
-	*	Klasa opisująca gniazdo nasłuchujące na połączenia
+	*	@brief Klasa opisująca gniazdo nasłuchujące na połączenia
+	*
 	*	Klasa posiada metodę Main() która będzie wołała podaną w parametrze funkcję wraz z każdym nowym połączeniem.
 	*/
 	class TCPSocketServer : public Tools::NoCopyU

@@ -16,7 +16,7 @@ namespace proZPRd
 	*	@file
 	*	@version 1.0
 	*	@class ServerThread
-	*	Klasa reprezentująca obiekt wątku roboczego obsługującego zapytania.
+	*	@brief Klasa reprezentująca obiekt wątku roboczego obsługującego zapytania.
 	*	
 	*	Kiedy obiekt klasy jest tworzony - zostaje uruchomiony wątek, który oczekuje na nowe połączenia pojawiające się w kolejce.
 	*	Obiekt zajmuje się obsługą jednego połączenia na raz, następnie je zamyka.

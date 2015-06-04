@@ -9,12 +9,14 @@ namespace proZPRd
 	*	@file
 	*	@version 1.0
 	*	@class HTTPRequest
-	*	Klasa parsująca otrzymane zapytania HTTP, umożliwiająca ich łatwą obsługę.
+	*	@brief Klasa parsująca otrzymane zapytania HTTP, umożliwiająca ich łatwą obsługę.
 	*/
 	class HTTPRequest
 	{
 		public:
 			/**
+			*	@brief Wyjątek rzucany przez metodę TryParse 
+			*	
 			*	Wyjątek rzucany przez metodę TryParse oznaczający, że Request nie jest jeszcze kompletny i potrzebna jest większa ilość danych
 			*/
 			class HTTPRequestNotComplete{ };
@@ -23,6 +25,7 @@ namespace proZPRd
 			*	Statyczna metoda tworząca obiekt tej klasy na podstawie czegoś, co powinno być zapytaniem.
 			*	Możliwe (i nawet na pewnym etapie konieczne) będzie podawanie jako argumentu danych otrzymanych od kliena, które niekoniecznie muszą stanowić pełne zapytanie (nigdy nie wiemy, czy klient skończył nadawać, czy nie)
 			*	Jeśli ilość danych jest wystarczająca - metoda zwróci obiekt tej klasy, jeśli nie - rzuci powyższy wyjątek.
+			*	@param Request zapytanie w postaci std::string.
 			*/
 			static HTTPRequest TryParse(const std::string & Request);
 			

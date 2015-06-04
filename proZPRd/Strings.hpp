@@ -10,7 +10,7 @@ namespace proZPRd
 	*	@file
 	*	@version 1.0
 	*	@class Strings
-	*	Klasa zawierająca narzędzia służące do obrabiania string'ów
+	*	@brief Klasa zawierająca narzędzia służące do obrabiania string'ów
 	*/
 	class Strings : Tools::NoCreateU
 	{

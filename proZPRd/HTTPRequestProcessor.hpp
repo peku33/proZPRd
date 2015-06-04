@@ -12,7 +12,8 @@ namespace proZPRd
 	*	@file
 	*	@version 1.0
 	*	@class HTTPRequestProcessor
-	*	Klasa służąca do przetwarzania zapytania na odpowiedź.
+	*	@brief Klasa służąca do przetwarzania zapytania na odpowiedź.
+	*
 	*	Zajmuje się dopasowaniem ustawień i zmiennych zapytania i wytworzeniem odpowiedzi
 	*/
 	class HTTPRequestProcessor : public Tools::NoCopyU
