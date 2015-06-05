@@ -44,13 +44,11 @@ int main(int ArgC, char ** ArgV)
 		{
             std::cout << "Processor returned an object of type HTTPResponseCode" << std::endl;
 		}
-
-		if((dynamic_cast < proZPRd::HTTPResponseContent* >  (Response.get())) != nullptr )
+		else if((dynamic_cast < proZPRd::HTTPResponseContent* >  (Response.get())) != nullptr )
 		{
             std::cout << "Processor returned an object of type HTTPResponseContent" << std::endl;
 		}
-
-		if((dynamic_cast < proZPRd::HTTPResponseNotModified* >  (Response.get())) != nullptr )
+		else if((dynamic_cast < proZPRd::HTTPResponseNotModified* >  (Response.get())) != nullptr )
 		{
             std::cout << "Processor returned an object of type HTTPResponseNotModified" << std::endl;
 		}
@@ -63,13 +61,11 @@ int main(int ArgC, char ** ArgV)
 		{
             std::cout << "Processor returned an object of type HTTPResponseCode" << std::endl;
 		}
-
-		if((dynamic_cast < proZPRd::HTTPResponseContent* >  (Response.get())) != nullptr )
+		else if((dynamic_cast < proZPRd::HTTPResponseContent* >  (Response.get())) != nullptr )
 		{
             std::cout << "Processor returned an object of type HTTPResponseContent" << std::endl;
 		}
-
-		if((dynamic_cast < proZPRd::HTTPResponseNotModified* >  (Response.get())) != nullptr )
+		else if((dynamic_cast < proZPRd::HTTPResponseNotModified* >  (Response.get())) != nullptr )
 		{
             std::cout << "Processor returned an object of type HTTPResponseNotModified" << std::endl;
 		}
@@ -82,13 +78,11 @@ int main(int ArgC, char ** ArgV)
 		{
             std::cout << "Processor returned an object of type HTTPResponseCode" << std::endl;
 		}
-
-		if((dynamic_cast < proZPRd::HTTPResponseContent* >  (Response.get())) != nullptr )
+		else if((dynamic_cast < proZPRd::HTTPResponseContent* >  (Response.get())) != nullptr )
 		{
             std::cout << "Processor returned an object of type HTTPResponseContent" << std::endl;
 		}
-
-		if((dynamic_cast < proZPRd::HTTPResponseNotModified* >  (Response.get())) != nullptr )
+		else if((dynamic_cast < proZPRd::HTTPResponseNotModified* >  (Response.get())) != nullptr )
 		{
             std::cout << "Processor returned an object of type HTTPResponseNotModified" << std::endl;
 		}
