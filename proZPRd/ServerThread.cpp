@@ -78,6 +78,7 @@ void proZPRd::ServerThread::Main()
 				break;
 			}
 			catch(HTTPRequest::HTTPRequestNotComplete &) {}
+			catch(std::exception & E) { Logger::Error("Thread #" + std::to_string(ThisThreadId) + ": " + E.what()); break; }
 			catch(...) { break; }
 		}
 	}

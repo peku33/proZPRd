@@ -7,7 +7,7 @@
 #include "Tools/Exception.hpp"
 
 proZPRd::Config::Config(const std::string & FileName): FileName(FileName),
-	ThreadsNum(0), BindAddress(), BindPort(0), HostMapping(), ParserMapping()
+	ThreadsNum(0), BindAddress(), BindPort(80), HostMapping(), ParserMapping()
 {
 	File::Lines_t Lines = File::GetLines(FileName);
 	for(std::string & LineRaw : Lines)
