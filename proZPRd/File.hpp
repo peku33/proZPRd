@@ -52,6 +52,7 @@ namespace proZPRd
 			*
 			*	Przechowuje nazwę jako Name oraz rozszerzenie jako Extension
 			*/
+			
 			struct FileStruct
 			{
 				std::string Name;
