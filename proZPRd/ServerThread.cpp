@@ -44,7 +44,6 @@ void proZPRd::ServerThread::Main()
 		
 		NewClientsQueueLock.unlock();
 		
-		//Logger::Info("Thread #" + std::to_string(ThisThreadId) + " processing request from: " + ThisClient->GetRemoteIpPortStr());
 		
 		/**
 			Bufor który będzie przyjmował do siebie przychodzące dane
@@ -79,7 +78,6 @@ void proZPRd::ServerThread::Main()
 			}
 			catch(HTTPRequest::HTTPRequestNotComplete &) {}
 			catch(std::exception & E) { Logger::Error("Thread #" + std::to_string(ThisThreadId) + ": " + E.what()); break; }
-			catch(...) { break; }
 		}
 	}
 }
