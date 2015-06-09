@@ -51,7 +51,11 @@ proZPRd::TCPSocketServer::TCPSocketServer(const std::string & Ip, const unsigned
 	if(Socket <= 0)
 		throw Tools::Exception(EXCEPTION_PARAMS, "Cannot open socket");
 	
-	if(::bind(Socket, (sockaddr*) &BindStruct, sizeof(BindStruct)) != 0)
+	int ReuseAddr = 1;
+	if(setsockopt(Socket, SOL_SOCKET, SO_REUSEADDR, &ReuseAddr, sizeof(ReuseAddr)) != 0)
+		throw Tools::Exception(EXCEPTION_PARAMS, "Cannot set SO_REUSEADDR");
+
+	if(bind(Socket, (sockaddr*) &BindStruct, sizeof(BindStruct)) != 0)
 		throw Tools::Exception(EXCEPTION_PARAMS, "Cannot bind to socket");
 	
 	if(listen(Socket, BackLogSize) != 0)
@@ -80,7 +84,7 @@ void proZPRd::TCPSocketServer::Main(NewClient_f AcceptFunction) const
 		
 		struct sockaddr_in NewSocketRemoteAddress;
 		socklen_t NewSocketRemoteAddressLength = sizeof(NewSocketRemoteAddress);
-		int NewSocket = ::accept(Socket, (struct sockaddr *) &NewSocketRemoteAddress, &NewSocketRemoteAddressLength);
+		int NewSocket = accept(Socket, (struct sockaddr *) &NewSocketRemoteAddress, &NewSocketRemoteAddressLength);
 		if(NewSocket <= 0)
 			throw Tools::Exception(EXCEPTION_PARAMS, "accept() failed");
 		

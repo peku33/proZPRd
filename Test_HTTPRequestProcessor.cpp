@@ -13,7 +13,7 @@
 * @brief Testy klasy HttpRequestProcessor.
 *
 */
-int main(int ArgC, char ** ArgV)
+int main()
 {
 	proZPRd::HTTPRequestProcessor::HostMapping_t HostMapping;
 	proZPRd::HTTPRequestProcessor::ParserMapping_t ParserMapping;
